@@ -6,6 +6,7 @@
 클라이언트 소스
 ## data
 가공전/후 데이터
+스크래퍼 포함(py)
 ## ERD
 **팀 신청 필요**
  - [ERDCloud](https://www.erdcloud.com/d/jsyxX4edf5Szqniam)

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="300" prefWidth="500" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1"
+            fx:controller="idol.tofu.client.MainController">
+    <padding>
+        <Insets bottom="10" top="10"/>
+    </padding>
+    <top>
+        <VBox>
+            <children>
+                <HBox alignment="TOP_CENTER">
+                    <children>
+                        <ImageView>
+                            <image>
+                                <Image url="@../../../../img/tofucinema.png"/>
+                            </image>
+                        </ImageView>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </top>
+    <center>
+        <GridPane alignment="CENTER" hgap="50">
+            <Button fx:id="reservationBtn" onAction="#handleReservationBtn" contentDisplay="TOP" text="예매"
+                    GridPane.columnIndex="0">
+                <graphic>
+                    <ImageView>
+                        <image>
+                            <Image url="@../../../../img/ticket.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="checkReservationBtn" onAction="#handleCheckReservationBtn" contentDisplay="TOP" text="예매확인"
+                    GridPane.columnIndex="1">
+                <graphic>
+                    <ImageView>
+                        <image>
+                            <Image url="@../../../../img/search.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="movieBtn" onAction="#handleMovieBtn" contentDisplay="TOP" text="영화" GridPane.columnIndex="2">
+                <graphic>
+                    <ImageView>
+                        <image>
+                            <Image url="@../../../../img/filmstrip.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="theaterBtn" onAction="#handleTheaterBtn" contentDisplay="TOP" text="영화관"
+                    GridPane.columnIndex="3">
+                <graphic>
+                    <ImageView>
+                        <image>
+                            <Image url="@../../../../img/theater.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <columnConstraints>
+                <ColumnConstraints/>
+                <ColumnConstraints/>
+                <ColumnConstraints/>
+                <ColumnConstraints/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints/>
+            </rowConstraints>
+        </GridPane>
+    </center>
+    <bottom>
+        <VBox alignment="CENTER" spacing="10">
+            <children>
+                <Label fx:id="statusLabel" text="비로그인 상태입니다"/>
+                <HBox alignment="BOTTOM_CENTER" spacing="20">
+                    <children>
+                        <Button fx:id="loginBtn" onAction="#handleLoginBtn" text="로그인"/>
+                        <Button fx:id="regBtn" onAction="#handleRegBtn" text="회원가입"/>
+                        <Button fx:id="managerBtn" onAction="#handleManagerBtn" visible="false" managed="false">
+                            <graphic>
+                                <ImageView>
+                                    <image>
+                                        <Image url="@../../../../img/cog.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </bottom>
+</BorderPane>

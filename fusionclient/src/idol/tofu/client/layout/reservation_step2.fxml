@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root type="StackPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+    <children>
+        <BorderPane>
+            <top>
+                <ListView fx:id="list_date" orientation="HORIZONTAL" prefHeight="30"/>
+            </top>
+            <center>
+                <ListView fx:id="list_schedule"/>
+            </center>
+        </BorderPane>
+        <ProgressIndicator fx:id="loading_indicator"/>
+    </children>
+</fx:root>

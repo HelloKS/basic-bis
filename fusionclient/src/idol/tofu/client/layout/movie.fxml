@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
+<StackPane fx:id="pane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="idol.tofu.client.MovieController">
+    <children>
+        <SplitPane dividerPositions="0.30">
+            <items>
+                <ListView fx:id="movie_list" onMouseClicked="#handleListClick" />
+                <VBox spacing="10">
+                    <padding>
+                        <Insets topRightBottomLeft="20"/>
+                    </padding>
+                    <children>
+                        <HBox spacing="10">
+                            <children>
+                                <ImageView fx:id="movie_poster">
+                                    <image>
+                                        <Image url="@../../../../img/small_poster_placeholder.jpg"/>
+                                    </image>
+                                </ImageView>
+                                <VBox>
+                                    <children>
+                                        <Label fx:id="movie_name" />
+                                        <Label fx:id="movie_genre" />
+                                        <Label fx:id="movie_release_date"/>
+                                        <Label fx:id="movie_runtime"/>
+                                        <Label fx:id="movie_actor" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+                        <Label text="[상세 정보]"/>
+                        <Label fx:id="movie_detail"/>
+                    </children>
+                </VBox>
+            </items>
+        </SplitPane>
+        <ProgressIndicator fx:id="indicator" />
+    </children>
+</StackPane>

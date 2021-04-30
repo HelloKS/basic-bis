@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane fx:id="pane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="idol.tofu.client.TheaterController">
+    <children>
+        <SplitPane dividerPositions="0.30">
+            <items>
+                <ListView fx:id="theater_list" onMouseClicked="#handleListClick" />
+                <VBox>
+                    <children>
+                        <Label fx:id="theater_name" />
+                        <Label fx:id="theater_addr" />
+                        <Label fx:id="theater_phone" />
+                    </children>
+                </VBox>
+            </items>
+        </SplitPane>
+        <ProgressIndicator fx:id="indicator" />
+    </children>
+</StackPane>

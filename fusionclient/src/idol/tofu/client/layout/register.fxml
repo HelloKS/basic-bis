@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.DatePicker?>
+<GridPane hgap="10.0" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="idol.tofu.client.RegisterController">
+    <padding>
+        <Insets topRightBottomLeft="10.0"/>
+    </padding>
+    <children>
+        <HBox GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.columnSpan="2" alignment="CENTER">
+            <children>
+                <VBox alignment="CENTER">
+                    <children>
+                        <Label text="회원가입"/>
+                        <Label text="회원이 되셔서 저희 두부무비를 즐겨보세요"/>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+        <Label GridPane.rowIndex="1" GridPane.columnIndex="0" text="아이디"/>
+        <TextField GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <Label GridPane.rowIndex="2" GridPane.columnIndex="0" text="비밀번호"/>
+        <PasswordField GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+        <Label GridPane.rowIndex="3" GridPane.columnIndex="0" text="비밀번호 재확인"/>
+        <PasswordField GridPane.rowIndex="3" GridPane.columnIndex="1" promptText="한번 더 입력해 주십시오"/>
+        <Label GridPane.rowIndex="4" GridPane.columnIndex="0" text="이름"/>
+        <TextField GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+        <Label GridPane.rowIndex="5" GridPane.columnIndex="0" text="전화번호"/>
+        <TextField GridPane.rowIndex="5" GridPane.columnIndex="1" promptText="010-1234-5678"/>
+        <Label GridPane.rowIndex="6" GridPane.columnIndex="0" text="닉네임"/>
+        <TextField GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+        <Label GridPane.rowIndex="7" GridPane.columnIndex="0" text="생년월일"/>
+        <DatePicker GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+        <Label GridPane.rowIndex="8" GridPane.columnIndex="0" text="이메일"/>
+        <TextField GridPane.rowIndex="8" GridPane.columnIndex="1" promptText="user@example.com"/>
+        <HBox GridPane.rowIndex="9" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.columnSpan="2" alignment="CENTER">
+            <children>
+                <Button text="가입"/>
+            </children>
+        </HBox>
+    </children>
+</GridPane>

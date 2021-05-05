@@ -3,6 +3,7 @@ package kumoh.basicbis;
 import kumoh.basicbis.services.BusStopService;
 import kumoh.basicbis.services.FoodService;
 import kumoh.basicbis.services.RouteService;
+import kumoh.basicbis.services.TimeTableService;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -104,6 +105,9 @@ public class ConnectionHelper {
             case BUS_STOP_REQ:
             case BUS_STOP_RES:
                 result = new BusStopService().processRequest(request);
+            case TIMETABLE_REQ:
+            case TIMETABLE_RES:
+                result = new TimeTableService().processRequest(request);
             default:
                 System.out.println("아무래도 망했어요");
         }

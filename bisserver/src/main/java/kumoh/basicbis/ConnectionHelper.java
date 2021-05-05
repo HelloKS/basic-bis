@@ -1,5 +1,9 @@
 package kumoh.basicbis;
 
+import kumoh.basicbis.services.BusStopService;
+import kumoh.basicbis.services.FoodService;
+import kumoh.basicbis.services.RouteService;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -91,6 +95,15 @@ public class ConnectionHelper {
         }
 
         switch (type) {
+            case FOOD_REQ:
+            case FOOD_RES:
+                result = new FoodService().processRequest(request);
+            case ROUTE_REQ:
+            case ROUTE_RES:
+                result = new RouteService().processRequest(request);
+            case BUS_STOP_REQ:
+            case BUS_STOP_RES:
+                result = new BusStopService().processRequest(request);
             default:
                 System.out.println("아무래도 망했어요");
         }

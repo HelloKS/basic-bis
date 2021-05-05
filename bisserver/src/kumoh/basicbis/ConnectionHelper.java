@@ -1,3 +1,5 @@
+package kumoh.basicbis;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -71,5 +73,31 @@ public class ConnectionHelper {
             }
 
         }
+    }
+
+    private String passWorkToService(String request) {
+        String result = null;
+        int typeCode;
+        ProtocolType type = ProtocolType.UNKNOWN;
+
+        System.out.println("[ConnectionHelper] 받은 요청: " + request);
+
+        String[] splitLines = request.split(",");
+        try{
+            typeCode = Integer.parseInt(splitLines[0]);
+            type = ProtocolType.values()[typeCode];
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        switch (type) {
+            default:
+                System.out.println("아무래도 망했어요");
+        }
+
+        result = result + "\r\n";
+        System.out.println("[ConnectionHelper] 보낸 답변: " + result);
+
+        return result;
     }
 }

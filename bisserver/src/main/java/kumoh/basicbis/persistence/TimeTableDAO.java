@@ -1,9 +1,5 @@
 package kumoh.basicbis.persistence;
 
-import oracle.jdbc.OracleTypes;
-import oracle.jdbc.oracore.OracleType;
-
-import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,8 +13,10 @@ public class TimeTableDAO extends BaseDAOImpl{
     * 버스시간표 안내 화면 - 노선의 배차시간표(timetable) 요청
     * 노선의 UID를 가지고 timetable 검색
     */
+    //XXX : 실패 시(검색결과가 없을 경우) : while문을 돌지 않고 바로 나오기 때문에 list가 null인 상태??
+
     public ArrayList<TimeTableDTO> getTimetable(String uid){
-        String sql = "SELECT * FROM \"timetable\" WHERE tt_routeuid =";
+        String sql = "SELECT * FROM timetable WHERE tt_routeid = ?";
         PreparedStatement statement = null;
         ResultSet result = null;
         ArrayList<TimeTableDTO> list = new ArrayList<>();
@@ -49,5 +47,4 @@ public class TimeTableDAO extends BaseDAOImpl{
         }
         return list;
     }
-
 }

@@ -5,26 +5,25 @@ import java.sql.Date;
 
 public class TimeTableDTO implements Serializable {
 
-    private string uid;
+    private String uid;
     private Date startTime; //배차시작시각
     private boolean isHoliday; //휴일배차여부
 
     public TimeTableDTO() {
     }
 
-    public TimeTableDTO(string uid, Date startTime, boolean isHoliday) {
+    public TimeTableDTO(String uid, Date startTime, boolean isHoliday) {
         this.uid = uid;
         this.startTime = startTime;
         this.isHoliday = isHoliday;
     }
 
-    public string getUid() {
+    public String getUid() {
         return uid;
     }
     public void setUid(String uid){
         this.uid = uid;
     }
-    //uid가 Route에서 끌고온 fk이므로 setUid는 없습니다
 
     public Date getStartTime() {
         return startTime;
@@ -40,8 +39,8 @@ public class TimeTableDTO implements Serializable {
         isHoliday = holiday;
     }
 
-    @java.lang.Override
-    public java.lang.String toString() {
+    @Override
+    public String toString() {
         return uid +
                "," + startTime +
                "," + isHoliday +

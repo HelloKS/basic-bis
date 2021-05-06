@@ -18,27 +18,27 @@ public class TimeTableDAO extends BaseDAOImpl{
     public ArrayList<TimeTableDTO> getTimetable(String uid){
         String sql = "SELECT * FROM timetable WHERE tt_routeid = ?";
         PreparedStatement statement = null;
-        ResultSet result = null;
+        ResultSet resultSet = null;
         ArrayList<TimeTableDTO> list = new ArrayList<>();
         try{
             getConnection();
             statement = conn.prepareStatement(sql);
             statement.setString(1, uid);
-            result = statement.executeQuery();
+            resultSet = statement.executeQuery();
 
-            while(result.next())
+            while(resultSet.next())
             {
                 TimeTableDTO timetable = new TimeTableDTO();
-                timetable.setUid(result.getString("tt_uid"));
-                timetable.setStartTime(result.getDate("tt_starttime"));
-                timetable.setHoliday(result.getBoolean("tt_isHoliday"));
+                timetable.setUid(resultSet.getString("tt_uid"));
+                timetable.setStartTime(resultSet.getDate("tt_starttime"));
+                timetable.setHoliday(resultSet.getBoolean("tt_isHoliday"));
                 list.add(timetable);
             }
         }catch(SQLException se){
             se.printStackTrace();
         }finally{
             try{
-                if(result != null) result.close();
+                if(resultSet != null) resultSet.close();
                 if(statement != null) statement.close();
                 if(conn != null) conn.close();
             }catch (Exception e){

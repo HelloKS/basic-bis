@@ -38,4 +38,11 @@ public class RouteDTO implements Serializable {
     public void setRouteNumber(int routeNumber) {
         this.routeNumber = routeNumber;
     }
+
+    @Override
+    public String toString() {
+        return busId +"," +
+                busStopId + "," +
+                routeNumber + ",";
+    }
 }

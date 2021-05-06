@@ -58,4 +58,14 @@ public class BusStopDTO implements Serializable {
     public void setMapY(double mapY) {
         this.mapY = mapY;
     }
+
+    @Override
+    public String toString() {
+        return uid +
+                "," + serviceId +
+                "," + name +
+                "," + mapX +
+                "," + mapY +
+                ',';
+    }
 }

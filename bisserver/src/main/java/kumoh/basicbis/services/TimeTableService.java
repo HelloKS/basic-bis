@@ -13,23 +13,28 @@ public class TimeTableService implements BaseService{
     * 사용되는 곳은 버스시간표안내 화면 - 시간표 클릭 & 노선 검색 화면 - 선택된 노선에서의 시간표 버튼 클릭
     *
     * */
-    public enum RES_Code{
-        ACCEPT(1), FAIL(2);
+    //TODO : 구현해나가면서 필요한 CODE 작성
+    public enum Indicator{
+        CODE(1), TIMETABLE_UID(2);
         private final int value;
-        RES_Code(int value){
+        Indicator(int value){
+            this.value = value;
+        }
+    }
+    public enum Code{
+        TIMETABLE(1), TIMETABLE_RES(1);
+        private final int value;
+        Code(int value){
             this.value = value;
         }
     }
 
     /*
-    * 노선uid를 주고 해당 노선의 운행시간표를 끌고와서 string으로 만들고 반환하는 함수
-    * 입력 : 프로토콜 타입+노선 uid
-    * 출력 : 프로토콜 타입+운행시간표 정보
     * reqText example
-    * ProtocolType,tt_routeuid
+    * code 1 : ProtocolType, Code, tt_routeuid
     *
     * result example
-    * ProtocolType(TIMETABLE_RES),tt_routeuid,tt_starttime,tt_isholiday,tt_routeuid,....
+    * code 1 : ProtocolType, Code, tt_routeuid, tt_starttime, tt_isholiday,....
     * */
     @Override
     public String processRequest(String reqText) {
@@ -40,17 +45,25 @@ public class TimeTableService implements BaseService{
 
         int type = ProtocolType.TIMETABLE_RES.getType();
         String[] parsedText = reqText.split(",");
+        Code code = Code.values()[Integer.parseInt(parsedText[TimeTableService.Indicator.CODE.value])];
 
-        list = timeTableDAO.getTimetable(parsedText[1]);    //reqText structure : ProtocolType,tt_routeuid
+        switch (code){
+            case TIMETABLE: { // 배차운행시간표 화면 - 해당 노선의 배차시간표 요청
+                // parsedText structure : ProtocolType,code,tt_routeuid
+                // getTimeTable의 검색결과가 없어서 null이 반환될 경우 for문 이전에 null 검사가 필요
+                list = timeTableDAO.getTimetable(parsedText[Indicator.TIMETABLE_UID.value]);
 
-        //getTimeTable의 검색결과가 없어서 null이 반환될 경우 for문 이전에 null 검사가 필요
-
-        for(TimeTableDTO index : list)
-        {
-            funcResult.append(index.toString()).append(",");
+                for (TimeTableDTO index : list) {
+                    funcResult.append(index.toString()).append(",");
+                }
+                break;
+            }
+            default:
+                break;
         }
+        code = Code.values()[Code.TIMETABLE_RES.value];
         funcResult.deleteCharAt(funcResult.lastIndexOf(","));
-        result = type + "," + funcResult.toString();
+        result = type + "," + code.value + "," + funcResult.toString();
         return result;
     }
 }

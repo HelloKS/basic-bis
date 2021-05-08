@@ -11,7 +11,6 @@ public class TimeTableService implements BaseService{
     /*
     * timetable은 노선의 운행시작시각을 나타낸다
     * 사용되는 곳은 버스시간표안내 화면 - 시간표 클릭 & 노선 검색 화면 - 선택된 노선에서의 시간표 버튼 클릭
-    *
     * */
     //TODO : 구현해나가면서 필요한 CODE 작성
     public enum Indicator{
@@ -22,7 +21,7 @@ public class TimeTableService implements BaseService{
         }
     }
     public enum Code{
-        TIMETABLE(1), TIMETABLE_RES(1);
+        TIMETABLE(1);
         private final int value;
         Code(int value){
             this.value = value;
@@ -61,7 +60,6 @@ public class TimeTableService implements BaseService{
             default:
                 break;
         }
-        code = Code.values()[Code.TIMETABLE_RES.value];
         funcResult.deleteCharAt(funcResult.lastIndexOf(","));
         result = type + "," + code.value + "," + funcResult.toString();
         return result;

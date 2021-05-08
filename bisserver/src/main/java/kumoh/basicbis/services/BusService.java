@@ -16,8 +16,7 @@ public class BusService implements BaseService{
         }
     }
     public enum Code{
-        BUS_LIST(1),
-        BUS_LIST_RES(1);
+        BUS_LIST(1);
 
         private final int value;
         Code(int value){
@@ -56,7 +55,6 @@ public class BusService implements BaseService{
             default:
                 break;
         }
-        code = Code.values()[Code.BUS_LIST_RES.value];
         funcResult.deleteCharAt(funcResult.lastIndexOf(","));
         result = type + "," + code.value + "," + funcResult.toString();
 

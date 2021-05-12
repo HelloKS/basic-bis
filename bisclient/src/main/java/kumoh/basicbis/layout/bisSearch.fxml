@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainController">
+   <children>
+      <Button layoutX="536.0" layoutY="14.0" mnemonicParsing="false" text="뒤로">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="280.0" fitWidth="280.0" layoutX="281.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true" />
+      <TabPane layoutX="14.0" layoutY="45.0" prefHeight="400.0" prefWidth="250.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="경로">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="8.0" layoutY="21.0" text="출발 :" />
+                        <Label layoutX="8.0" layoutY="73.0" text="도착 :" />
+                        <Button layoutX="196.0" layoutY="17.0" mnemonicParsing="false" text="검색" />
+                        <Button layoutX="196.0" layoutY="69.0" mnemonicParsing="false" text="검색" />
+                        <Button layoutX="12.0" layoutY="118.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="227.0" text="길찾기 검색" />
+                        <ListView layoutX="12.0" layoutY="149.0" prefHeight="200.0" prefWidth="227.0" />
+                        <TextField layoutX="46.0" layoutY="17.0" />
+                        <TextField layoutX="46.0" layoutY="69.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="정류장">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutY="14.0" text="정류장 이름:" />
+                        <Label layoutY="60.0" text="정류장 번호:" />
+                        <TextField layoutX="68.0" layoutY="10.0" />
+                        <TextField layoutX="68.0" layoutY="56.0" />
+                        <Button layoutX="209.0" layoutY="10.0" mnemonicParsing="false" text="검색" />
+                        <Button layoutX="209.0" layoutY="56.0" mnemonicParsing="false" text="검색" />
+                        <ListView layoutX="12.0" layoutY="92.0" prefHeight="229.0" prefWidth="226.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="노선">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="256.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="7.0" layoutY="14.0" text="검색 :" />
+                        <TextField layoutX="47.0" layoutY="10.0" promptText="내용을 입력해주세요" />
+                        <Button layoutX="195.0" layoutY="10.0" mnemonicParsing="false" text="검색" />
+                        <ListView layoutX="25.0" layoutY="42.0" prefHeight="116.0" prefWidth="200.0" />
+                        <ListView layoutX="25.0" layoutY="158.0" prefHeight="187.0" prefWidth="200.0" />
+                        <Button layoutX="173.0" layoutY="158.0" mnemonicParsing="false" text="시간표" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="노선추천">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button layoutX="203.0" layoutY="14.0" mnemonicParsing="false" text="검색" />
+                        <Button layoutX="203.0" layoutY="47.0" mnemonicParsing="false" text="검색" />
+                        <TextField layoutX="56.0" layoutY="14.0" />
+                        <TextField layoutX="56.0" layoutY="47.0" />
+                        <Label layoutX="14.0" layoutY="18.0" text="출발 :" />
+                        <Label layoutX="14.0" layoutY="51.0" text="도착 :" />
+                        <Button layoutX="16.0" layoutY="78.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="227.0" text="결과 검색" />
+                        <ListView layoutX="30.0" layoutY="114.0" prefHeight="200.0" prefWidth="200.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Label layoutX="210.0" layoutY="13.0" text="버스 정보 검색">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

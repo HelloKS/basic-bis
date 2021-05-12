@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainController">
+   <children>
+      <Button layoutX="536.0" layoutY="14.0" mnemonicParsing="false" text="뒤로">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Label layoutX="252.0" layoutY="18.0" text="음식점 추천">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="122.0" layoutY="84.0" text="정류장 이름:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField layoutX="229.0" layoutY="82.0" prefHeight="23.0" prefWidth="207.0" />
+      <Label layoutX="64.0" layoutY="154.0" />
+      <Label layoutX="64.0" layoutY="146.0" text="음식점 정보">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TableView layoutX="64.0" layoutY="169.0" prefHeight="204.0" prefWidth="484.0">
+        <columns>
+          <TableColumn prefWidth="140.0" text="업소명" />
+          <TableColumn prefWidth="200.0" text="주소(도로명)" />
+            <TableColumn prefWidth="144.0" text="소재지전화" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainController">
+   <children>
+      <Label layoutX="231.0" layoutY="14.0" text="배차 운행 시간표">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="536.0" layoutY="10.0" mnemonicParsing="false" text="뒤로">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <TableView layoutX="40.0" layoutY="140.0" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn prefWidth="66.0" text="순번" />
+          <TableColumn prefWidth="134.0" text="시간" />
+        </columns>
+      </TableView>
+      <TableView layoutX="361.0" layoutY="140.0" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn prefWidth="66.0" text="순번" />
+          <TableColumn prefWidth="134.0" text="시간" />
+        </columns>
+      </TableView>
+      <Label layoutX="40.0" layoutY="117.0" text="평일">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="361.0" layoutY="117.0" text="주말">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="name" layoutX="40.0" layoutY="65.0" text="버스 노선 이름">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

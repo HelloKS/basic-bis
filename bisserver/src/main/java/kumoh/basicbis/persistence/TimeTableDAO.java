@@ -12,9 +12,8 @@ public class TimeTableDAO extends BaseDAOImpl{
     /*
     * 버스시간표 안내 화면 - 노선의 배차시간표(timetable) 요청
     * 노선의 UID를 가지고 timetable 검색
+    * XXX : 실패 시(검색결과가 없을 경우) : while문을 돌지 않고 바로 나오기 때문에 list가 null인 상태??
     */
-    //XXX : 실패 시(검색결과가 없을 경우) : while문을 돌지 않고 바로 나오기 때문에 list가 null인 상태??
-
     public ArrayList<TimeTableDTO> getTimetable(String uid){
         String sql = "SELECT * FROM timetable WHERE tt_routeid = ?";
         PreparedStatement statement = null;

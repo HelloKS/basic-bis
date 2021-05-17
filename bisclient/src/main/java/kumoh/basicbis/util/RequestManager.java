@@ -1,4 +1,4 @@
-package kumoh.basicbis.prototest.util;
+package kumoh.basicbis.util;
 
 import kumoh.basicbis.prototest.ProtocolType;
 
@@ -21,6 +21,7 @@ public class RequestManager {
             sock.shutdownOutput();
 
             result = br.readLine();
+            sock.close();
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -50,7 +50,7 @@ public class TimeTableService implements BaseService{
             case TIMETABLE: { // 배차운행시간표 화면 - 해당 노선의 배차시간표 요청
                 // parsedText structure : ProtocolType,code,tt_routeuid
                 // getTimeTable의 검색결과가 없어서 null이 반환될 경우 for문 이전에 null 검사가 필요
-                list = timeTableDAO.getTimetable(parsedText[Indicator.TIMETABLE_UID.value]);
+                list = timeTableDAO.getTimetableByBusUid(parsedText[Indicator.TIMETABLE_UID.value]);
 
                 for (TimeTableDTO index : list) {
                     funcResult.append(index.toString()).append(",");

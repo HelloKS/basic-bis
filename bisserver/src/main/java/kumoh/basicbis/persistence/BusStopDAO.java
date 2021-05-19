@@ -51,7 +51,7 @@ public class BusStopDAO extends BaseDAOImpl{
 
     /*
     * SQL 설명 : busUid 버스 노선이 경유하는 버스 정류장의 모든 정보를 가져온다
-    *
+    * 사용처1: 버스 노선 안내 - 경유 정류장 정보 출력
     * */
     public ArrayList<BusStopDTO> getBusStopByBusuid(String busUid)
     {
@@ -88,4 +88,6 @@ public class BusStopDAO extends BaseDAOImpl{
         }
         return list;
     }
+
+
 }

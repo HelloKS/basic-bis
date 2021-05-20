@@ -50,12 +50,13 @@ public class TimeTableDAO extends BaseDAOImpl{
     /*
     * SQL 설명 : sql을 2번 써서 각각 버스노선UID의 !!평일!! 첫차시간과 막차시간을 가져옴
     * 사용처1 : 버스 노선 안내 화면 - 첫차시간&막차시간 출력
+    * 사용처2 : 노선 검색 화면 - 결과항목 중 노선 하나 선택시, 노선 정보가 출력
     * 솔직히 제대로 작동하는지는 테스트 해봐야함
     * */
     public ArrayList<TimeTableDTO> getFirstLastTimetable(String uid){
         String firstSql = "select * from timetable  where isholiday = 0 and tt_routeid = ?" +
                 " order by tt_starttime asc limit 1;";
-        String secondSql = "select * from timetable  where isholiday = 0 and tt_routeid = 1010" +
+        String secondSql = "select * from timetable  where isholiday = 0 and tt_routeid = ?" +
                 " order by tt_starttime desc limit 1;";
         PreparedStatement statement = null;
         ResultSet resultSet = null;

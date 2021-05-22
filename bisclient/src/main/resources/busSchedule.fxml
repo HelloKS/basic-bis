@@ -10,28 +10,12 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kumoh.basicbis.ScheduleController">
    <children>
-      <ScrollPane layoutX="23.0" layoutY="53.0" prefHeight="315.0" prefWidth="555.0">
-         <content>
-            <TableView prefHeight="315.0" prefWidth="555.0">
-              <columns>
-                <TableColumn prefWidth="111.0" text="노선번호" />
-                <TableColumn prefWidth="111.0" text="주요 경유지" />
-                  <TableColumn prefWidth="111.0" text="출발지" />
-                  <TableColumn prefWidth="111.0" text="도착지" />
-                  <TableColumn prefWidth="111.0" text="시간표" />
-              </columns>
-            </TableView>
-         </content>
-      </ScrollPane>
+       <TableView fx:id="tableView" layoutX="23.0" layoutY="53.0" prefHeight="315.0" prefWidth="555.0">
+       </TableView>
       <Label layoutX="252.0" layoutY="18.0" text="버스 시간표">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="536.0" layoutY="14.0" mnemonicParsing="false" text="뒤로">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>

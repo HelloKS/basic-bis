@@ -15,11 +15,6 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="536.0" layoutY="10.0" mnemonicParsing="false" text="뒤로">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
       <TableView layoutX="40.0" layoutY="140.0" prefHeight="200.0" prefWidth="200.0">
         <columns>
           <TableColumn prefWidth="66.0" text="순번" />

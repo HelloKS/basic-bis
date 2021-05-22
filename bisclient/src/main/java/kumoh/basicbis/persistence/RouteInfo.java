@@ -1,15 +1,15 @@
 package kumoh.basicbis.persistence;
 
 // Route: 노선
-public class RouteDTO {
+public class RouteInfo {
     private String uid;
     private String id;
     private String name;
 
-    public RouteDTO() {
+    public RouteInfo() {
     }
 
-    public RouteDTO(String uid, String id, String name) {
+    public RouteInfo(String uid, String id, String name) {
         this.uid = uid;
         this.id = id;
         this.name = name;
@@ -43,6 +43,6 @@ public class RouteDTO {
     public String toString() {
         return uid + ',' +
                 id + ',' +
-                name;
+                name + '\n';
     }
 }

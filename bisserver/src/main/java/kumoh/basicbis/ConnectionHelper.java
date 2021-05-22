@@ -45,9 +45,9 @@ public class ConnectionHelper {
 
             try {
                 is = clientSock.getInputStream();
-                br = new BufferedReader(new InputStreamReader(is));
+                br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
                 os = clientSock.getOutputStream();
-                pw = new PrintWriter(os, true);
+                pw = new PrintWriter(new BufferedWriter((new OutputStreamWriter(os, "UTF-8"))));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -63,8 +63,19 @@ public class ConnectionHelper {
                 e.printStackTrace();
             }
 
-            pw.write(passWorkToService(line));
-            pw.flush();
+            // 서버 -> 클라이언트
+
+            String serviceResult = passWorkToService(line);
+            String svcSplit[] = serviceResult.split("\r\n");
+
+            for (String entry : svcSplit) {
+                //System.out.println("[ConnectionHelper] 전송: " + entry);
+                pw.write(entry + "\r\n");
+                pw.flush();
+            }
+
+            //pw.write("EOF\r\n");
+            //pw.flush();
 
             if (br != null && pw != null) {
                 try {
@@ -87,9 +98,10 @@ public class ConnectionHelper {
 
         System.out.println("[ConnectionHelper] 받은 요청: " + request);
 
-        String[] splitLines = request.split(",");
+        String header = request.split("\r\n")[0];
         try{
-            typeCode = Integer.parseInt(splitLines[0]);
+            String[] header_split = header.split(",");
+            typeCode = Integer.parseInt(header_split[0]);
             type = ProtocolType.values()[typeCode];
         } catch (Exception e) {
             e.printStackTrace();
@@ -97,23 +109,24 @@ public class ConnectionHelper {
 
         switch (type) {
             case FOOD_REQ:
-            case FOOD_RES:
                 result = new FoodService().processRequest(request);
+                break;
             case ROUTE_REQ:
-            case ROUTE_RES:
                 result = new RouteService().processRequest(request);
+                break;
             case BUS_STOP_REQ:
-            case BUS_STOP_RES:
                 result = new BusStopService().processRequest(request);
+                break;
             case TIMETABLE_REQ:
-            case TIMETABLE_RES:
                 result = new TimeTableService().processRequest(request);
+                break;
             default:
                 System.out.println("아무래도 망했어요");
+                break;
         }
 
         result = result + "\r\n";
-        System.out.println("[ConnectionHelper] 보낸 답변: " + result);
+        //System.out.println("[ConnectionHelper] 보낸 답변: " + result);
 
         return result;
     }

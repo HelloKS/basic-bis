@@ -38,7 +38,7 @@ public class BusService implements BaseService{
         BusDAO busDAO = new BusDAO();
         ArrayList<BusDTO> list = null;
 
-        int type = ProtocolType.ROUTE_RES.getType();
+        //int type = ProtocolType.ROUTE_RES.getType();
         String[] parsedText = reqText.split(",");
         Code code = Code.values()[Integer.parseInt(parsedText[Indicator.CODE.value])];
 
@@ -56,8 +56,8 @@ public class BusService implements BaseService{
                 break;
         }
         funcResult.deleteCharAt(funcResult.lastIndexOf(","));
-        result = type + "," + code.value + "," + funcResult.toString();
-
+        //result = type + "," + code.value + "," + funcResult.toString();
+        result = "";
         return result;
     }
 }

@@ -28,9 +28,9 @@ public class TimeTableDAO extends BaseDAOImpl{
             while(resultSet.next())
             {
                 TimeTableDTO timetable = new TimeTableDTO();
-                timetable.setUid(resultSet.getString("tt_uid"));
-                timetable.setStartTime(resultSet.getDate("tt_starttime"));
-                timetable.setHoliday(resultSet.getBoolean("tt_isHoliday"));
+                timetable.setUid(resultSet.getString("tt_routeid"));
+                timetable.setStartTime(resultSet.getTime("tt_starttime"));
+                timetable.setHoliday(resultSet.getBoolean("tt_isholiday"));
                 list.add(timetable);
             }
         }catch(SQLException se){
@@ -70,8 +70,8 @@ public class TimeTableDAO extends BaseDAOImpl{
             while(resultSet.next())
             {
                 TimeTableDTO timetable = new TimeTableDTO();
-                timetable.setUid(resultSet.getString("tt_uid"));
-                timetable.setStartTime(resultSet.getDate("tt_starttime"));
+                timetable.setUid(resultSet.getString("tt_routeid"));
+                timetable.setStartTime(resultSet.getTime("tt_starttime"));
                 timetable.setHoliday(resultSet.getBoolean("tt_isHoliday"));
                 list.add(timetable);
             }
@@ -82,8 +82,8 @@ public class TimeTableDAO extends BaseDAOImpl{
             while(resultSet.next())
             {
                 TimeTableDTO timetable = new TimeTableDTO();
-                timetable.setUid(resultSet.getString("tt_uid"));
-                timetable.setStartTime(resultSet.getDate("tt_starttime"));
+                timetable.setUid(resultSet.getString("tt_routeid"));
+                timetable.setStartTime(resultSet.getTime("tt_starttime"));
                 timetable.setHoliday(resultSet.getBoolean("tt_isHoliday"));
                 list.add(timetable);
             }

@@ -1,19 +1,20 @@
 package kumoh.basicbis.persistence;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
 
 public class TimeTableDTO implements Serializable {
 
     private String uid;
     //FIXME : 배차시작시각 자료형 논의 후 수정
-    private Date startTime; //배차시작시각
+    private Time startTime; //배차시작시각
     private boolean isHoliday; //휴일배차여부
 
     public TimeTableDTO() {
     }
 
-    public TimeTableDTO(String uid, Date startTime, boolean isHoliday) {
+    public TimeTableDTO(String uid, Time startTime, boolean isHoliday) {
         this.uid = uid;
         this.startTime = startTime;
         this.isHoliday = isHoliday;
@@ -26,10 +27,10 @@ public class TimeTableDTO implements Serializable {
         this.uid = uid;
     }
     //FIXME : 자료형에 따라 getter setter 메소드 유의해야 함.
-    public Date getStartTime() {
+    public Time getStartTime() {
         return startTime;
     }
-    public void setStartTime(Date startTime) {
+    public void setStartTime(Time startTime) {
         this.startTime = startTime;
     }
 
@@ -42,9 +43,11 @@ public class TimeTableDTO implements Serializable {
 
     @Override
     public String toString() {
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+        String sTime = format.format(startTime);
+
         return uid +
-               "," + startTime +
-               "," + isHoliday +
-               ',';
+               "," + sTime +
+               "," + isHoliday;
     }
 }

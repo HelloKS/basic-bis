@@ -1,7 +1,5 @@
 package kumoh.basicbis.util;
 
-import kumoh.basicbis.prototest.ProtocolType;
-
 import java.io.*;
 import java.net.Socket;
 

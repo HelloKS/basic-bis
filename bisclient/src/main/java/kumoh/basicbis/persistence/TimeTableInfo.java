@@ -1,5 +1,6 @@
 package kumoh.basicbis.persistence;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class TimeTableInfo {
@@ -39,9 +40,11 @@ public class TimeTableInfo {
 
     @Override
     public String toString() {
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+        String sTime = format.format(startTime);
+
         return uid +
-                "," + startTime +
-                "," + isHoliday +
-                ',';
+                "," + sTime +
+                "," + isHoliday;
     }
 }

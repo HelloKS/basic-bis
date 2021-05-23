@@ -18,7 +18,7 @@ public class RouteTask extends Task<List<RouteInfo>> {
     @Override
     protected List<RouteInfo> call() throws Exception {
 
-        String response = manager.sendRequest("3,1," + query + "\r\n");
+        String response = manager.sendRequest("2,1," + query + "\r\n");
         //System.out.println("[RouteTask] 받은 답변: " + response);
 
         String[] responseSplit = response.split("\r\n");

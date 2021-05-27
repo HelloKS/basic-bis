@@ -10,9 +10,9 @@ public class BusStopDAO extends BaseDAOImpl{
 
 
     /*
-    * SQL 설명: busStopName(버스정류장명)으로 버스 노선이 경유하는 버스 정류장의 모든 정보를 가져온다
+    * SQL 설명: busStopName(버스정류장명)으로 버스 정류장의 모든 정보를 가져온다
     * 사용처1: 경로검색 기능 - 출발/도착 정류장 검색에서 사용 가능
-    * 사용처2: 버스 정류장 안내 화면 - 출발/도착 정류장 검색에서 사용
+    * 사용처2: 버스 정류장 검색 화면 - 정류장명으로 검색에서 사용 가능
     *  */
     public ArrayList<BusStopDTO> getBusStopByBusName(String busStopName)
     {

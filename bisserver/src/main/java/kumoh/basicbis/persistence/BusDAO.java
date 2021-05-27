@@ -9,6 +9,48 @@ public class BusDAO extends BaseDAOImpl{
     public BusDAO(){}
 
     /*
+     * SQL 설명: 출발정류장uid와 도착정류장uid를 입력받아 둘 다 경유하는 모든 버스 노선을 출력한다
+     * 사용처1 : 경로검색 기능 - 길찾기 검색
+     *
+     *
+     * */
+    public ArrayList<BusDTO> getBusByBusStop(String startUid, String endUid)
+    {
+        String sql = "select * from bus_route where rt_uid IN " +
+                "(select a.rt_uid from route_link a inner join route_link b " +
+                "on a.st_uid = ? and b.st_uid = ?);";
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        ArrayList<BusDTO> list = new ArrayList<>();
+        try{
+            getConnection();
+            statement = conn.prepareStatement(sql);
+            statement.setString(1, startUid);
+            statement.setString(2, endUid);
+            resultSet = statement.executeQuery();
+            while(resultSet.next())
+            {
+                BusDTO busDTO = new BusDTO();
+                busDTO.setUid(resultSet.getString("rt_uid"));
+                busDTO.setId(resultSet.getString("rt_id"));
+                busDTO.setName(resultSet.getString("rt_name"));
+                list.add(busDTO);
+            }
+        }catch (SQLException se) {
+            se.printStackTrace();
+        }finally {
+            try{
+                if(resultSet != null) resultSet.close();
+                if(statement != null) statement.close();
+                if(conn != null) conn.close();
+            }catch (Exception e){
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return list;
+    }
+
+    /*
     * SQL 설명 : 버스노선 테이블에서 모든 정보를 출력한다.
     * 사용처1: 버스시간표 안내 화면 - 노선번호, 출발지&도착지 정보
     * */

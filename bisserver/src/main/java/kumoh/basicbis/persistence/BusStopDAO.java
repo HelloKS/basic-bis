@@ -16,7 +16,7 @@ public class BusStopDAO extends BaseDAOImpl{
     *  */
     public ArrayList<BusStopDTO> getBusStopByBusName(String busStopName)
     {
-        String sql = "select * from bus_stop where st_name like \"%?%\";";
+        String sql = "select * from bus_stop where st_name like concat('%',?,'%');";
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         ArrayList<BusStopDTO> list = new ArrayList<>();

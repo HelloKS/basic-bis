@@ -20,6 +20,7 @@ public class BusService implements BaseService{
         }
     }
     public enum Code{
+        UNKNOWN(0),
         BUS_LIST_BY_BUS_STOP_UID(1);
 
         private final int value;
@@ -38,28 +39,35 @@ public class BusService implements BaseService{
     @Override
     public String processRequest(String reqText) {
         String result = null;
-        StringBuilder funcResult = new StringBuilder();
+        String sqlResult = null;
         String[] parsedText = reqText.split(",");
         Code code = Code.values()[Integer.parseInt(parsedText[Indicator.CODE.value])];
         final int TYPE = ProtocolType.ROUTE_REQ.getType();
 
         switch (code){
             case BUS_LIST_BY_BUS_STOP_UID: {
-                BusDAO busDAO = new BusDAO();
                 String firstBusStop = parsedText[Indicator.START_BUS_STOP_UID.value];
                 String endBusStop = parsedText[Indicator.END_BUS_STOP_UID.value];
-                ArrayList<BusDTO> list = busDAO.getBusByBusStop(firstBusStop, endBusStop);
-                for(BusDTO index : list)
-                {
-                    funcResult.append(index.toString()).append(",");
-                }
+                sqlResult = busListProvider(firstBusStop, endBusStop);
                 break;
             }
             default:
                 break;
         }
-        funcResult.deleteCharAt(funcResult.lastIndexOf(","));
-        result = TYPE + "," + code.value + "," + funcResult.toString();
+        result = TYPE + "," + code.value + "," + sqlResult.toString();
         return result;
+    }
+
+    private String busListProvider(String firstBusStop, String endBusStop)
+    {
+        ArrayList<BusDTO> list;
+        BusDAO busDAO = new BusDAO();
+        StringBuilder stringBuilder = new StringBuilder();
+        list = busDAO.getBusByBusStop(firstBusStop, endBusStop);
+        for(BusDTO index : list)
+        {
+            stringBuilder.append(index.toString()).append(",");
+        }
+        return stringBuilder.toString();
     }
 }

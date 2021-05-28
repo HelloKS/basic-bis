@@ -9,12 +9,16 @@ import java.util.ArrayList;
 public class BusStopService implements BaseService {
     public enum Indicator {
         CODE(1),
-        BUS_STOP_NAME(3);
+        BUS_STOP_NAME(2);
         private final int value;
-        Indicator(int value){this.value = value;}
+
+        Indicator(int value) {
+            this.value = value;
+        }
     }
 
     public enum Code {
+        UNKNOWN(0),
         BUS_STOP_BY_BUS_NAME(1);
 
         private final int value;
@@ -24,36 +28,44 @@ public class BusStopService implements BaseService {
         }
     }
 
+    BusStopDAO busStopDAO = new BusStopDAO();
+
     /*
-    * reqText example
-    * code 1: ProtocolType,Code,BusStopName
-    *
-    * resText example
-    * code 1: ProtocolType,Code,st_uid,st_svcid,st_name,st_mapx,st_mapy,st_uid,...
-    * */
+     * reqText example
+     * code 1: ProtocolType,Code,BusStopName
+     *
+     * resText example
+     * code 1: ProtocolType,Code,st_uid,st_svcid,st_name,st_mapx,st_mapy,st_uid,...
+     * */
     @Override
     public String processRequest(String reqText) {
         String result = null;
-        StringBuilder funcResult = new StringBuilder();
+        String sqlResult = null;
         String[] parsedText = reqText.split(",");
-        Code code = Code.values()[Integer.parseInt(parsedText[Indicator.CODE.value])];
+
+        int codeIndex = Integer.parseInt(parsedText[Indicator.CODE.value]);
+        BusStopService.Code code = Code.values()[codeIndex];
+
         final int TYPE = ProtocolType.BUS_STOP_REQ.getType();
 
-        switch (code)
-        {
+        switch (code) {
             case BUS_STOP_BY_BUS_NAME:
-            {
-                BusStopDAO busStopDAO = new BusStopDAO();
-                ArrayList<BusStopDTO> list = busStopDAO.getBusStopByBusName(parsedText[Indicator.BUS_STOP_NAME.value]);
-                for(BusStopDTO index : list)
-                {
-                    funcResult.append(index.toString()).append(",");
-                }
+                sqlResult = busStopListProvider(parsedText[Indicator.BUS_STOP_NAME.value]);
                 break;
-            }
+            default:
+                break;
         }
-        funcResult.deleteCharAt(funcResult.lastIndexOf(","));
-        result = TYPE + "," + code.value + "," + funcResult.toString();
+        result = TYPE + "," + code.value + "," + sqlResult;
         return result;
+    }
+
+    private String busStopListProvider(String requestBody) {
+        ArrayList<BusStopDTO> list;
+        StringBuilder stringBuilder = new StringBuilder();
+        list = busStopDAO.getBusStopByBusName(requestBody);
+        for (BusStopDTO index : list) {
+            stringBuilder.append(index.toString()).append("\r\n");
+        }
+        return stringBuilder.toString();
     }
 }

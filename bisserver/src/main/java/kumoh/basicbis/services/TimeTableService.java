@@ -9,59 +9,61 @@ import kumoh.basicbis.persistence.TimeTableDTO;
 import java.util.ArrayList;
 
 public class TimeTableService implements BaseService {
+    public enum Indicator {
+        CODE(1),
+        BUS_UID(2);
 
-    /*
-    * timetable은 노선의 운행시작시각을 나타낸다
-    * 사용되는 곳은 버스시간표안내 화면 - 시간표 클릭 & 노선 검색 화면 - 선택된 노선에서의 시간표 버튼 클릭
-    * */
-    //TODO : 구현해나가면서 필요한 CODE 작성
-    TimeTableDAO timetableDAO = new TimeTableDAO();
+        private final int value;
 
-    //서비스 코드
-    private enum ServiceType{
+        Indicator(int value) {
+            this.value = value;
+        }
+    }
+
+    private enum Code {
         UNKNOWN(0),
         GET_ALL_BY_UID(1),
         FIRST_LAST_TIME_BY_UID(2);
 
         private final int value;
-        ServiceType(int value){
+
+        Code(int value) {
             this.value = value;
         }
     }
 
+    TimeTableDAO timetableDAO = new TimeTableDAO();
+
     /*
-    * reqText example
-    * code 1 : ProtocolType, Code, tt_routeuid
-    *
-    * result example
-    * code 1 : tt_routeuid, tt_starttime, tt_isholiday\r\n
-    * ~~~....
-    * */
+     * reqText example
+     * code 1 : ProtocolType, Code, tt_routeuid
+     *
+     * result example
+     * code 1 : tt_routeuid, tt_starttime, tt_isholiday\r\n
+     * ~~~....
+     * */
     @Override
     public String processRequest(String reqText) {
         String result = "";
-        TimeTableService.ServiceType svcType = ServiceType.UNKNOWN;
+        String sqlResult = null;
+        String[] parsedText = reqText.split(",");
 
-        String[] reqText_split = reqText.split(",");
-        //String[] serviceHeader = reqText_split[0].split(",");
+        int codeIndex = Integer.parseInt(parsedText[Indicator.CODE.value]);
+        TimeTableService.Code code = TimeTableService.Code.values()[codeIndex];
 
-        try {
-            int svc = Integer.parseInt(reqText_split[1]);
-            svcType = TimeTableService.ServiceType.values()[svc];
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        final int TYPE = ProtocolType.TIMETABLE_REQ.getType();
 
-        switch (svcType) {
+        switch (code) {
             case GET_ALL_BY_UID:
-                    result = timeTableListProvider(reqText_split[2]);
+                sqlResult = timeTableListProvider(parsedText[Indicator.BUS_UID.value]);
                 break;
             case FIRST_LAST_TIME_BY_UID:
+                sqlResult = fisrtEndTimeProvider(parsedText[Indicator.BUS_UID.value]);
                 break;
             default:
                 break;
         }
-
+        result = TYPE + "," + code.value + "," + sqlResult;
         return result;
     }
 
@@ -76,5 +78,16 @@ public class TimeTableService implements BaseService {
         }
 
         return sbuilder.toString();
+    }
+
+    private String fisrtEndTimeProvider(String requestBody){
+        ArrayList<TimeTableDTO> list;
+        StringBuilder stringBuilder = new StringBuilder();
+        list = timetableDAO.getFirstLastTimetable(requestBody);
+
+        for(TimeTableDTO index : list){
+            stringBuilder.append(index.toString()).append("\r\n");
+        }
+        return stringBuilder.toString();
     }
 }

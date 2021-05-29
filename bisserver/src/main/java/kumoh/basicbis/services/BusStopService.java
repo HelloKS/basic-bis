@@ -32,30 +32,26 @@ public class BusStopService implements BaseService {
 
     /*
      * reqText example
-     * code 1: ProtocolType,Code,BusStopName
+     * code 1: st_name
      *
      * resText example
-     * code 1: ProtocolType,Code,st_uid,st_svcid,st_name,st_mapx,st_mapy,st_uid,...
+     * code 1: st_uid,st_svcid,st_name,st_mapx,st_mapy,st_uid,...
      * */
     @Override
     public String processRequest(String reqText) {
         String result = null;
-        String sqlResult = null;
         String[] parsedText = reqText.split(",");
 
         int codeIndex = Integer.parseInt(parsedText[Indicator.CODE.value]);
         BusStopService.Code code = Code.values()[codeIndex];
 
-        final int TYPE = ProtocolType.BUS_STOP_REQ.getType();
-
         switch (code) {
             case BUS_STOP_BY_BUS_NAME:
-                sqlResult = busStopListProvider(parsedText[Indicator.BUS_STOP_NAME.value]);
+                result = busStopListProvider(parsedText[Indicator.BUS_STOP_NAME.value]);
                 break;
             default:
                 break;
         }
-        result = TYPE + "," + code.value + "," + sqlResult;
         return result;
     }
 

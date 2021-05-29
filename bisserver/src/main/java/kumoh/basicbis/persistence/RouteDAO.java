@@ -43,4 +43,34 @@ public class RouteDAO extends BaseDAOImpl{
         }
         return list;
     }
+
+    public String getRouteByBusId(String busUid) {
+        String sql = "SELECT st_name FROM bus_stop WHERE st_uid IN" +
+                "(SELECT st_uid FROM route_link WHERE rt_uid = ?)";
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        ArrayList<BusStopDTO> list = new ArrayList<>();
+        StringBuilder sqlResult = new StringBuilder();
+        try {
+            getConnection();
+            statement = conn.prepareStatement(sql);
+            statement.setString(1, busUid);
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                sqlResult.append(resultSet.getString("st_name")).append(",");
+            }
+        }catch (SQLException se){
+            se.printStackTrace();
+        }finally {
+            try{
+                if(resultSet != null) resultSet.close();
+                if(statement != null) statement.close();
+                if(conn != null) conn.close();
+            }catch (Exception e){
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return sqlResult.toString();
+    }
 }

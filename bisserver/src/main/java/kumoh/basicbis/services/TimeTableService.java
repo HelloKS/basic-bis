@@ -40,30 +40,27 @@ public class TimeTableService implements BaseService {
      *
      * result example
      * code 1 : tt_routeuid, tt_starttime, tt_isholiday\r\n
+     * code 2 :
      * ~~~....
      * */
     @Override
     public String processRequest(String reqText) {
         String result = "";
-        String sqlResult = null;
         String[] parsedText = reqText.split(",");
 
         int codeIndex = Integer.parseInt(parsedText[Indicator.CODE.value]);
         TimeTableService.Code code = TimeTableService.Code.values()[codeIndex];
 
-        final int TYPE = ProtocolType.TIMETABLE_REQ.getType();
-
         switch (code) {
             case GET_ALL_BY_UID:
-                sqlResult = timeTableListProvider(parsedText[Indicator.BUS_UID.value]);
+                result = timeTableListProvider(parsedText[Indicator.BUS_UID.value]);
                 break;
             case FIRST_LAST_TIME_BY_UID:
-                sqlResult = fisrtEndTimeProvider(parsedText[Indicator.BUS_UID.value]);
+                result = fisrtEndTimeProvider(parsedText[Indicator.BUS_UID.value]);
                 break;
             default:
                 break;
         }
-        result = TYPE + "," + code.value + "," + sqlResult;
         return result;
     }
 

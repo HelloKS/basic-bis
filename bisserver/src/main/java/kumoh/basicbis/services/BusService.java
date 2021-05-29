@@ -21,7 +21,8 @@ public class BusService implements BaseService{
     }
     public enum Code{
         UNKNOWN(0),
-        BUS_LIST_BY_BUS_STOP_UID(1);
+        BUS_LIST_BY_BUS_STOP_UID(1),
+        ALL_BUS_DETAIL(2);
 
         private final int value;
         Code(int value){
@@ -31,30 +32,28 @@ public class BusService implements BaseService{
 
     /*
     * reqText example
-    * code 1: ProtocolType,Code,st_uid,st_uid
+    * code 1: st_uid,st_uid
     *
     * resText example
-    * code 1: ProtocolType,code,rt_uid,rt_id,rt_name,rt_uid,rt_id,...
+    * code 1: rt_uid,rt_id,rt_name,rt_uid,rt_id,...
     * */
     @Override
     public String processRequest(String reqText) {
         String result = null;
-        String sqlResult = null;
         String[] parsedText = reqText.split(",");
         Code code = Code.values()[Integer.parseInt(parsedText[Indicator.CODE.value])];
-        final int TYPE = ProtocolType.ROUTE_REQ.getType();
 
         switch (code){
-            case BUS_LIST_BY_BUS_STOP_UID: {
+            case BUS_LIST_BY_BUS_STOP_UID:
                 String firstBusStop = parsedText[Indicator.START_BUS_STOP_UID.value];
                 String endBusStop = parsedText[Indicator.END_BUS_STOP_UID.value];
-                sqlResult = busListProvider(firstBusStop, endBusStop);
+                result = busListProvider(firstBusStop, endBusStop);
                 break;
-            }
+            case ALL_BUS_DETAIL:
+                result = allBusDetailProvider();
             default:
                 break;
         }
-        result = TYPE + "," + code.value + "," + sqlResult.toString();
         return result;
     }
 
@@ -66,7 +65,19 @@ public class BusService implements BaseService{
         list = busDAO.getBusByBusStop(firstBusStop, endBusStop);
         for(BusDTO index : list)
         {
-            stringBuilder.append(index.toString()).append(",");
+            stringBuilder.append(index.toString()).append("\r\n");
+        }
+        return stringBuilder.toString();
+    }
+    private String allBusDetailProvider()
+    {
+        ArrayList<BusDTO> list;
+        BusDAO busDAO = new BusDAO();
+        StringBuilder stringBuilder = new StringBuilder();
+        list = busDAO.getAllBusDetail();
+        for(BusDTO index : list)
+        {
+            stringBuilder.append(index.toString()).append("\r\n");
         }
         return stringBuilder.toString();
     }

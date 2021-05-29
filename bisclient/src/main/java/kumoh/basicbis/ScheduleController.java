@@ -37,10 +37,15 @@ public class ScheduleController {
     public TableColumn[] getColumns() {
         final TableColumn<RouteInfo, String> idColumn = new TableColumn<>("노선 번호");
         idColumn.setCellValueFactory(item -> new ReadOnlyStringWrapper(item.getValue().getId()));
+        idColumn.setPrefWidth(140);
 
-        final TableColumn<RouteInfo, String> nameColumn = new TableColumn<>("노선 이름");
-        nameColumn.setCellValueFactory(item -> new ReadOnlyStringWrapper(item.getValue().getName()));
-        nameColumn.setPrefWidth(400);
+        final TableColumn<RouteInfo, String> startStopNameColumn = new TableColumn<>("기점");
+        startStopNameColumn.setCellValueFactory(item -> new ReadOnlyStringWrapper(item.getValue().getName().split(" [→↔] ")[0]));
+        startStopNameColumn.setPrefWidth(170);
+
+        final TableColumn<RouteInfo, String> lastStopNameColumn = new TableColumn<>("종점");
+        lastStopNameColumn.setCellValueFactory(item -> new ReadOnlyStringWrapper(item.getValue().getName().split(" [→↔] ")[1]));
+        lastStopNameColumn.setPrefWidth(170);
 
         final TableColumn<RouteInfo, RouteInfo> actionColumn = new TableColumn<>("시간표");
         actionColumn.setCellValueFactory(item -> new ReadOnlyObjectWrapper<>(item.getValue()));
@@ -60,7 +65,7 @@ public class ScheduleController {
             }
         });
 
-        return new TableColumn[]{idColumn,nameColumn,actionColumn};
+        return new TableColumn[]{idColumn,startStopNameColumn,lastStopNameColumn,actionColumn};
     }
 
     public void handleOpenTimetableBtn(RouteInfo route) {

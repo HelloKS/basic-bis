@@ -15,13 +15,13 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TableView layoutX="40.0" layoutY="140.0" prefHeight="200.0" prefWidth="200.0">
+      <TableView layoutX="40.0" layoutY="140.0" prefHeight="200.0" prefWidth="200.0" fx:id="weekTable">
         <columns>
           <TableColumn prefWidth="66.0" text="순번" />
           <TableColumn prefWidth="134.0" text="시간" />
         </columns>
       </TableView>
-      <TableView layoutX="361.0" layoutY="140.0" prefHeight="200.0" prefWidth="200.0">
+      <TableView layoutX="361.0" layoutY="140.0" prefHeight="200.0" prefWidth="200.0" fx:id="holidayTable">
         <columns>
           <TableColumn prefWidth="66.0" text="순번" />
           <TableColumn prefWidth="134.0" text="시간" />

@@ -34,7 +34,7 @@ public class TimetableTask extends Task<List<TimeTableInfo>> {
 
             timetable.setUid(lineSplit[0]);
             timetable.setStartTime(startTime);
-            timetable.setHoliday(lineSplit[2] == "true");
+            timetable.setHoliday(lineSplit[2].equals("true"));
 
             list.add(timetable);
         }

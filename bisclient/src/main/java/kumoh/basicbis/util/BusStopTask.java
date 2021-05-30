@@ -14,7 +14,7 @@ import java.util.List;
 public class BusStopTask extends Task<List<BusStopInfo>> {
     RequestManager manager = new RequestManager();
     private final List<BusStopInfo> list = new ArrayList<>();
-    String query = "";
+    String query = "구미역";
 
     @Override
     protected List<BusStopInfo> call() throws Exception {

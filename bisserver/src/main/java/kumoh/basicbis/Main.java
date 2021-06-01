@@ -17,8 +17,6 @@ public class Main {
 
         System.out.println("Running on port " + PORT_NUMBER);
 
-        BusService busService = new BusService();
-        busService.processRequest("2,4,60,62");
         conn = new ConnectionHelper();
         conn.startServer(PORT_NUMBER);
     }

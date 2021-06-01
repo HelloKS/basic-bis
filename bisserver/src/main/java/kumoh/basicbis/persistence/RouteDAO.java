@@ -1,5 +1,6 @@
 package kumoh.basicbis.persistence;
 
+import java.sql.Array;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -72,5 +73,34 @@ public class RouteDAO extends BaseDAOImpl{
             }
         }
         return sqlResult.toString();
+    }
+
+    public int getRouteNumber(String busUid, String busStopUid){
+        String sql = "SELECT rl_num FROM route_link WHERE rt_uid = ? AND st_uid = ?";
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        ArrayList<RouteDTO> list = new ArrayList<>();
+        int result = 0;
+        try{
+            getConnection();
+            statement = conn.prepareStatement(sql);
+            statement.setString(1,busUid);
+            statement.setString(2,busStopUid);
+            resultSet = statement.executeQuery();
+            while(resultSet.next()){
+                result = resultSet.getInt("rl_num");
+            }
+        }catch (SQLException se){
+            se.printStackTrace();
+        }finally{
+            try{
+                if(resultSet != null) resultSet.close();
+                if(statement != null) statement.close();
+                if(conn != null) conn.close();
+            }catch (Exception e){
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return result;
     }
 }

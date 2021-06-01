@@ -9,7 +9,7 @@ import kumoh.basicbis.persistence.TimeTableDTO;
 import java.util.ArrayList;
 
 public class TimeTableService implements BaseService {
-    public enum Indicator {
+    private enum Indicator {
         CODE(1),
         BUS_UID(2);
 

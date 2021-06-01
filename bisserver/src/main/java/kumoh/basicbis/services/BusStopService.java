@@ -1,15 +1,15 @@
 package kumoh.basicbis.services;
 
-import kumoh.basicbis.ProtocolType;
 import kumoh.basicbis.persistence.BusStopDAO;
 import kumoh.basicbis.persistence.BusStopDTO;
 
 import java.util.ArrayList;
 
 public class BusStopService implements BaseService {
-    public enum Indicator {
+    private enum Indicator {
         CODE(1),
-        BUS_STOP_NAME(2);
+        BUS_STOP_NAME(2),
+        BUS_STOP_UID(2);
         private final int value;
 
         Indicator(int value) {
@@ -17,9 +17,10 @@ public class BusStopService implements BaseService {
         }
     }
 
-    public enum Code {
+    private enum Code {
         UNKNOWN(0),
-        BUS_STOP_BY_BUS_NAME(1);
+        BUS_STOP_BY_BUS_NAME(1),
+        BUS_STOP_BY_UID(2);
 
         private final int value;
 
@@ -49,6 +50,8 @@ public class BusStopService implements BaseService {
             case BUS_STOP_BY_BUS_NAME:
                 result = busStopListProvider(parsedText[Indicator.BUS_STOP_NAME.value]);
                 break;
+            case BUS_STOP_BY_UID:
+                result = busStopProvider(parsedText[Indicator.BUS_STOP_UID.value]);
             default:
                 break;
         }
@@ -59,6 +62,16 @@ public class BusStopService implements BaseService {
         ArrayList<BusStopDTO> list;
         StringBuilder stringBuilder = new StringBuilder();
         list = busStopDAO.getBusStopByBusName(requestBody);
+        for (BusStopDTO index : list) {
+            stringBuilder.append(index.toString()).append("\r\n");
+        }
+        return stringBuilder.toString();
+    }
+
+    private String busStopProvider(String requestBody){
+        ArrayList<BusStopDTO> list;
+        StringBuilder stringBuilder = new StringBuilder();
+        list = busStopDAO.getBusStopByBusStopUid(Integer.parseInt(requestBody));
         for (BusStopDTO index : list) {
             stringBuilder.append(index.toString()).append("\r\n");
         }

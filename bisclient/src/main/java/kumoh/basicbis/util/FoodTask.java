@@ -50,18 +50,18 @@ public class FoodTask extends Task<List<Food>> {
     @Override
     protected void running() {
         super.running();
-        System.out.println("TimetableTask: Running...");
+        System.out.println("FoodTask: Running...");
     }
 
     @Override
     protected void succeeded() {
         super.succeeded();
-        System.out.println("TimetableTask: OK");
+        System.out.println("FoodTask: OK");
     }
 
     @Override
     protected void failed() {
         super.failed();
-        System.out.println("TimetableTask: FAILED!");
+        System.out.println("FoodTask: FAILED!");
     }
 }

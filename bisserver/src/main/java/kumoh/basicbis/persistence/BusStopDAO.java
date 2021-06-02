@@ -54,16 +54,16 @@ public class BusStopDAO extends BaseDAOImpl{
     * PK로 검색하기 때문에 항상 반환은 1개
     * 사용처1: 버스정류장 안내 화면 - 정류장 고유번호 검색
     * */
-    public ArrayList<BusStopDTO> getBusStopByBusStopUid(int busstopUid)
+    public ArrayList<BusStopDTO> getBusStopByBusStopServiceId(int serviceId)
     {
-        String sql = "SELECT * FROM bus_stop WHERE st_uid = ?;";
+        String sql = "SELECT * FROM bus_stop WHERE st_svcid = ?;";
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         ArrayList<BusStopDTO> list = new ArrayList<>();
         try{
             getConnection();
             statement = conn.prepareStatement(sql);
-            statement.setInt(1,busstopUid);
+            statement.setInt(1,serviceId);
             resultSet = statement.executeQuery();
             while(resultSet.next())
             {

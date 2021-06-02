@@ -3,26 +3,21 @@ package kumoh.basicbis.util;
 import javafx.concurrent.Task;
 import kumoh.basicbis.persistence.BusStopInfo;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BusStopTask extends Task<List<BusStopInfo>> {
+public class BusStopTask2 extends Task<List<BusStopInfo>> {
     RequestManager manager = new RequestManager();
     private final List<BusStopInfo> list = new ArrayList<>();
     String query = "";
 
-    public BusStopTask(String query) { this.query = query;}
+    public BusStopTask2(String query) { this.query = query;}
 
     @Override
     protected List<BusStopInfo> call() throws Exception {
 
-        String response = manager.sendRequest("1,1," + query + "\r\n");
-        System.out.println("[BusStopTask] 받은 답변: " + response);
+        String response = manager.sendRequest("1,2," + query + "\r\n");
+        System.out.println("[BusStopTask2] 받은 답변: " + response);
 
         String[] responseSplit = response.split("\r\n");
 
@@ -49,18 +44,18 @@ public class BusStopTask extends Task<List<BusStopInfo>> {
     @Override
     protected void running() {
         super.running();
-        System.out.println("BusStopTask: Running...");
+        System.out.println("BusStopTask2: Running...");
     }
 
     @Override
     protected void succeeded() {
         super.succeeded();
-        System.out.println("BusStopTask: OK");
+        System.out.println("BusStopTask2: OK");
     }
 
     @Override
     protected void failed() {
         super.failed();
-        System.out.println("BusStopTask: FAILED!");
+        System.out.println("BusStopTask2: FAILED!");
     }
 }

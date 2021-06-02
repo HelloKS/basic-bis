@@ -71,7 +71,7 @@ public class BusStopService implements BaseService {
     private String busStopProvider(String requestBody){
         ArrayList<BusStopDTO> list;
         StringBuilder stringBuilder = new StringBuilder();
-        list = busStopDAO.getBusStopByBusStopUid(Integer.parseInt(requestBody));
+        list = busStopDAO.getBusStopByBusStopServiceId(Integer.parseInt(requestBody));
         for (BusStopDTO index : list) {
             stringBuilder.append(index.toString()).append("\r\n");
         }

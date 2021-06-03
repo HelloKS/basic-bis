@@ -130,5 +130,39 @@ public class BusStopDAO extends BaseDAOImpl{
         return list;
     }
 
+    public ArrayList<BusStopDTO> getAllBusStop()
+    {
+        String sql = "SELECT * FROM bus_stop";
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        ArrayList<BusStopDTO> list = new ArrayList<>();
+        try{
+            getConnection();
+            statement = conn.prepareStatement(sql);
+            resultSet = statement.executeQuery();
+            while(resultSet.next())
+            {
+                BusStopDTO busStopDTO = new BusStopDTO();
+                busStopDTO.setUid(resultSet.getInt("st_uid"));
+                busStopDTO.setServiceId(resultSet.getInt("st_svcid"));
+                busStopDTO.setName(resultSet.getString("st_name"));
+                busStopDTO.setMapX(resultSet.getDouble("st_mapx"));
+                busStopDTO.setMapY(resultSet.getDouble("st_mapy"));
+                list.add(busStopDTO);
+            }
+        }catch (SQLException se) {
+            se.printStackTrace();
+        }finally {
+            try{
+                if(resultSet != null) resultSet.close();
+                if(statement != null) statement.close();
+                if(conn != null) conn.close();
+            }catch (Exception e){
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return list;
+    }
+
 
 }

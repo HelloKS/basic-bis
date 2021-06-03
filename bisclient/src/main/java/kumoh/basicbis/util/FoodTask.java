@@ -18,6 +18,8 @@ public class FoodTask extends Task<List<Food>> {
     private final List<Food> list = new ArrayList<>();
     String query = "";
 
+    public FoodTask(String query) { this.query = query; }
+
     @Override
     protected List<Food> call() throws Exception {
 

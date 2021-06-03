@@ -17,8 +17,8 @@ public class BusDAO extends BaseDAOImpl{
     public ArrayList<BusDTO> getBusByBusStop(String startUid, String endUid)
     {
         String sql = "select * from bus_route where rt_uid IN " +
-                "(select a.rt_uid from route_link a inner join route_link b " +
-                "on a.st_uid = ? and b.st_uid = ?);";
+                "(select a.rt_uid from route_link AS a, route_link AS b where a.rt_uid = b.rt_uid " +
+                "AND a.st_uid = ? AND b.st_uid = ?);";
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         ArrayList<BusDTO> list = new ArrayList<>();

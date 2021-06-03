@@ -20,7 +20,8 @@ public class BusStopService implements BaseService {
     private enum Code {
         UNKNOWN(0),
         BUS_STOP_BY_BUS_NAME(1),
-        BUS_STOP_BY_UID(2);
+        BUS_STOP_BY_UID(2),
+        All_BUS_STOP_DETAILS(3);
 
         private final int value;
 
@@ -52,6 +53,8 @@ public class BusStopService implements BaseService {
                 break;
             case BUS_STOP_BY_UID:
                 result = busStopProvider(parsedText[Indicator.BUS_STOP_UID.value]);
+            case All_BUS_STOP_DETAILS:
+                result = allBusStopProvider();
             default:
                 break;
         }
@@ -73,6 +76,16 @@ public class BusStopService implements BaseService {
         StringBuilder stringBuilder = new StringBuilder();
         list = busStopDAO.getBusStopByBusStopServiceId(Integer.parseInt(requestBody));
         for (BusStopDTO index : list) {
+            stringBuilder.append(index.toString()).append("\r\n");
+        }
+        return stringBuilder.toString();
+    }
+
+    private String allBusStopProvider(){
+        ArrayList<BusStopDTO> list;
+        StringBuilder stringBuilder = new StringBuilder();
+        list = busStopDAO.getAllBusStop();
+        for(BusStopDTO index : list){
             stringBuilder.append(index.toString()).append("\r\n");
         }
         return stringBuilder.toString();

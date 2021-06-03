@@ -77,8 +77,11 @@ public class BusService implements BaseService {
         ArrayList<BusDTO> list;
         StringBuilder stringBuilder = new StringBuilder();
         list = busDAO.getBusByBusStop(firstBusStop, endBusStop);
+        int leftBusStop;
         for (BusDTO index : list) {
-            stringBuilder.append(index.toString()).append("\r\n");
+            leftBusStop = calculateLeftBusStop(index.getUid(),firstBusStop,endBusStop);
+            if(leftBusStop > 0)
+                stringBuilder.append(index.toString()).append(leftBusStop).append("\r\n");
         }
         return stringBuilder.toString();
     }

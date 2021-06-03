@@ -37,11 +37,11 @@ public class FoodService implements BaseService {
         return result;
     }
 
-    private String recommendationProvider(String busStopUid){
+    private String recommendationProvider(String busStopServiceUid){
         ArrayList<BusStopDTO> busStop;
         ArrayList<FoodDTO> list;
         StringBuilder stringBuilder = new StringBuilder();
-        busStop = busStopDAO.getBusStopByBusStopServiceId(Integer.parseInt(busStopUid));
+        busStop = busStopDAO.getBusStopByBusStopServiceId(Integer.parseInt(busStopServiceUid));
         list = foodDAO.getFoodbyMap(busStop.get(0).getMapX(), busStop.get(0).getMapY());
         for(FoodDTO index : list){
             stringBuilder.append(index.toString()).append("\r\n");

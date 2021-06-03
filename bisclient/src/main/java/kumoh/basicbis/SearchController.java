@@ -9,6 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import kumoh.basicbis.persistence.BusInfo;
 import kumoh.basicbis.persistence.BusStopInfo;
+import kumoh.basicbis.util.BusInfoTask;
 import kumoh.basicbis.util.BusStopTask;
 import kumoh.basicbis.util.BusStopTask2;
 
@@ -22,6 +23,7 @@ public class SearchController {
     @FXML private TextField rtTextField1;
     @FXML private TextField rtTextField2;
     @FXML private ListView<BusStopInfo> rtListView;
+    @FXML private ListView<BusInfo> resultView;
 
     /* 정류장 검색 */
     @FXML private Button bsBt;
@@ -34,9 +36,10 @@ public class SearchController {
     //textField확인용
     int check = 0;
     private ObservableList<BusStopInfo> list;
+    private ObservableList<BusInfo> busList;
 
     //버스 정류장 정보 가져오기 (이름 검색)
-    public void searchRt(String query) {
+    public void searchRt(String query, int type) {
         BusStopTask task = new BusStopTask(query);
         list = FXCollections.observableArrayList();
 
@@ -44,21 +47,23 @@ public class SearchController {
             list.addAll(task.getValue()); }
         );
 
-        rtListView.setItems(list);
-        rtListView.setCellFactory(new Callback<ListView<BusStopInfo>, ListCell<BusStopInfo>>() {
-            @Override
-            public ListCell<BusStopInfo> call(ListView<BusStopInfo> busStopInfoListView) {
-                return new BusStopInfoListViewCell();
-            }
-        });
-
-        bsListView1.setItems(list);
-        bsListView1.setCellFactory(new Callback<ListView<BusStopInfo>, ListCell<BusStopInfo>>() {
-            @Override
-            public ListCell<BusStopInfo> call(ListView<BusStopInfo> busStopInfoListView) {
-                return new BusStopInfoListViewCell();
-            }
-        });
+        if(type == 1) {
+            rtListView.setItems(list);
+            rtListView.setCellFactory(new Callback<ListView<BusStopInfo>, ListCell<BusStopInfo>>() {
+                @Override
+                public ListCell<BusStopInfo> call(ListView<BusStopInfo> busStopInfoListView) {
+                    return new BusStopInfoListViewCell();
+                }
+            });
+        } else if(type == 2) {
+            bsListView1.setItems(list);
+            bsListView1.setCellFactory(new Callback<ListView<BusStopInfo>, ListCell<BusStopInfo>>() {
+                @Override
+                public ListCell<BusStopInfo> call(ListView<BusStopInfo> busStopInfoListView) {
+                    return new BusStopInfoListViewCell();
+                }
+            });
+        }
         Thread thread = new Thread(task, "BusStopTask-thread");
         thread.setDaemon(true);
         thread.start();
@@ -85,6 +90,26 @@ public class SearchController {
         thread.start();
     }
 
+    //버스 검색
+    public void searchRtBus(String query) {
+        BusInfoTask task = new BusInfoTask(query);
+        busList = FXCollections.observableArrayList();
+
+        task.setOnSucceeded(workerStateEvent -> {
+            busList.addAll(task.getValue()); });
+
+        resultView.setItems(busList);
+        resultView.setCellFactory(new Callback<ListView<BusInfo>, ListCell<BusInfo>>() {
+            @Override
+            public ListCell<BusInfo> call(ListView<BusInfo> busInfoListView) {
+                return new busInfoListViewCell();
+            }
+        });
+
+
+    }
+
+    //리스트 마우스 선택 이벤트
     public void rtSelected(MouseEvent mouseEvent) {
         BusStopInfo name = rtListView.getSelectionModel().getSelectedItem();
         if(name != null) {
@@ -97,30 +122,32 @@ public class SearchController {
         }
     }
 
-    //경로 검색 1
+    //출발정류장 검색
     public void rtStartBt(ActionEvent actionEvent) {
-        searchRt(rtTextField1.getText());
+        searchRt(rtTextField1.getText(),1);
         check = 1;
     }
 
-    //경로 검색 2
+    //도착정류장 검색
     public void rtEndBt(ActionEvent actionEvent) {
-        searchRt(rtTextField2.getText());
+        searchRt(rtTextField2.getText(),1);
         check = 2;
     }
 
-    //해당 경로2개를가는 버스검색
+    //해당 정류장2개를가는 버스검색
     public void rtSearchBus(ActionEvent actionEvent) {
-
+        System.out.print("ㅎㅇㅎㅇ");
+        String query = rtTextField1.getText() + ',' + rtTextField2.getText();
+        searchRtBus(query);
     }
 
-    //정류장 이름 검색
+    //정류장 이름 선택
     public void selectName(ActionEvent actionEvent) {
         if(stopName.isSelected()) {check = 1;}
         else check = 0;
 
     }
-    //정류장 번호 검색
+    //정류장 번호 선택
     public void selectNumber(ActionEvent actionEvent) {
         if(stopNumber.isSelected()) {check = 2;}
         else check = 0;
@@ -131,7 +158,7 @@ public class SearchController {
     //버튼검색
     public void bsBt(ActionEvent actionEvent) {
         if(check == 1) {
-            searchRt(bsTextField.getText());
+            searchRt(bsTextField.getText(),2);
         } else if(check == 2) {
             searchRtId(bsTextField.getText());
         }

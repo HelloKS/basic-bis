@@ -6,7 +6,9 @@ public enum ProtocolType {
     BUS_STOP_REQ(1),
     ROUTE_REQ(2),
     FOOD_REQ(3),
-    TIMETABLE_REQ(4);
+    TIMETABLE_REQ(4),
+    BUS_REQ(5);
+
 
     private int value;
 

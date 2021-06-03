@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kumoh.basicbis.SearchController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kumoh.basicbis.SearchController">
    <children>
       <TabPane layoutX="14.0" layoutY="45.0" prefHeight="400.0" prefWidth="582.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -18,13 +15,14 @@
                      <children>
                         <Label layoutX="8.0" layoutY="21.0" text="출발 :" />
                         <Label layoutX="8.0" layoutY="73.0" text="도착 :" />
-                        <Button fx:id="rtBt1" layoutX="196.0" layoutY="17.0" mnemonicParsing="false" onAction="#rtStartBt" text="검색" />
-                        <Button fx:id="rtBt2" layoutX="196.0" layoutY="69.0" mnemonicParsing="false" onAction="#rtEndBt" text="검색" />
+                        <Button fx:id="rtBt1" layoutX="207.0" layoutY="17.0" mnemonicParsing="false" onAction="#rtStartBt" text="검색" />
+                        <Button fx:id="rtBt2" layoutX="207.0" layoutY="69.0" mnemonicParsing="false" onAction="#rtEndBt" text="검색" />
                         <Button fx:id="rtBt3" layoutX="12.0" layoutY="118.0" mnemonicParsing="false" onAction="#rtSearchBus" prefHeight="23.0" prefWidth="227.0" text="길찾기 검색" />
                         <ListView fx:id="rtListView" layoutX="12.0" layoutY="149.0" onMouseClicked="#rtSelected" prefHeight="200.0" prefWidth="227.0" />
                         <TextField fx:id="rtTextField1" layoutX="46.0" layoutY="17.0" />
                         <TextField fx:id="rtTextField2" layoutX="46.0" layoutY="69.0" />
-                        <ImageView fitHeight="280.0" fitWidth="280.0" layoutX="266.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="280.0" fitWidth="284.0" layoutX="271.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" />
+                        <ListView fx:id="resultView" layoutX="271.0" layoutY="3.0" prefHeight="65.0" prefWidth="284.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -35,7 +33,7 @@
                      <children>
                         <TextField fx:id="bsTextField" layoutX="14.0" layoutY="56.0" prefHeight="23.0" prefWidth="180.0" />
                         <Button fx:id="bsBt" layoutX="205.0" layoutY="56.0" mnemonicParsing="false" onAction="#bsBt" text="검색" />
-                        <ListView fx:id="bsListView1" onMouseClicked="#bsSelected" layoutX="12.0" layoutY="92.0" prefHeight="229.0" prefWidth="226.0" />
+                        <ListView fx:id="bsListView1" layoutX="12.0" layoutY="92.0" onMouseClicked="#bsSelected" prefHeight="229.0" prefWidth="226.0" />
                         <CheckBox fx:id="stopName" layoutX="14.0" layoutY="25.0" mnemonicParsing="false" onAction="#selectName" text="정류장 이름" />
                         <CheckBox fx:id="stopNumber" layoutX="125.0" layoutY="25.0" mnemonicParsing="false" onAction="#selectNumber" text="정류장 번호" />
                         <Label layoutX="276.0" layoutY="18.0" text="경유 버스 번호 목록" />

@@ -9,6 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.text.Text?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="kumoh.basicbis.NewBusStopInfoController">
@@ -20,16 +21,24 @@
                         <HBox>
                             <children>
                                 <TextField HBox.hgrow="ALWAYS" fx:id="searchField" promptText="정류장 이름"/>
-                                <Button fx:id="searchBtn" text="검색"/>
+                                <Button fx:id="searchBtn" text="검색" onAction="#searchStop"/>
                             </children>
                         </HBox>
-                        <Button HBox.hgrow="ALWAYS" maxWidth="Infinity" fx:id="showAll" text="전체 정류장 보기"/>
+                        <Button HBox.hgrow="ALWAYS" maxWidth="Infinity" fx:id="showAll" text="전체 정류장 보기" onAction="#showAll"/>
                         <ListView VBox.vgrow="ALWAYS" fx:id="stopList"/>
                     </children>
                 </VBox>
                 <BorderPane>
                     <top>
-                        <Text fx:id="stopName"/>
+                        <VBox alignment="CENTER">
+                            <children>
+                                <Label fx:id="stopName" text="버스 정류장을 선택해주세요">
+                                    <font>
+                                        <Font size="20"/>
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
                     </top>
                     <center>
                         <ImageView fx:id="mapImage"></ImageView>
@@ -39,6 +48,7 @@
                             <children>
                                 <Button fx:id="showRoute" text="경유 노선"/>
                                 <Button fx:id="showFood" text="주변 음식점"/>
+                                <Button fx:id="showComingBus" text="버스 도착정보"/>
                             </children>
                             <HBox.margin>
                                 <Insets bottom="10"/>

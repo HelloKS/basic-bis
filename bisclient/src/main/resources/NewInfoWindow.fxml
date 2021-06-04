@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TabPane xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml"
+         fx:controller="kumoh.basicbis.NewInfoWindowController"
+         prefHeight="700.0" prefWidth="800.0"
+         fx:id="tabPane">
+    <tabs>
+        <Tab text="버스 정류장">
+            <content>
+                <fx:include source="NewBusStopInfo.fxml"/>
+            </content>
+        </Tab>
+        <Tab text="버스 노선">
+        </Tab>
+    </tabs>
+</TabPane>

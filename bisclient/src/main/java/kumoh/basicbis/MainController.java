@@ -32,12 +32,12 @@ public class MainController {
     //버스 노선 검색
     @FXML protected void openRT(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/routeInfo.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/NewInfoWindow.fxml"));
             Parent root = (Parent) loader.load();
             Scene scene = new Scene(root);
 
             Stage stage = new Stage();
-            stage.setTitle("버스 노선 검색");
+            stage.setTitle("정류장 / 노선 정보");
             stage.setScene(scene);
             stage.resizableProperty().setValue(false);
             stage.show();

@@ -24,18 +24,18 @@ public class ImageLoadTask extends Task<Image> {
     @Override
     protected void running() {
         super.running();
-        System.out.println("RouteTask: Running...");
+        System.out.println("ImageLoadTask: Running...");
     }
 
     @Override
     protected void succeeded() {
         super.succeeded();
-        System.out.println("RouteTask: OK");
+        System.out.println("ImageLoadTask: OK");
     }
 
     @Override
     protected void failed() {
         super.failed();
-        System.out.println("RouteTask: FAILED!");
+        System.out.println("ImageLoadTask: FAILED!");
     }
 }

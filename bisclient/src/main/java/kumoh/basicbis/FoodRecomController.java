@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.util.Callback;
 import kumoh.basicbis.persistence.BusStopInfo;
 import kumoh.basicbis.persistence.Food;
 import kumoh.basicbis.util.BusStopTask3;
@@ -52,6 +53,16 @@ public class FoodRecomController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         BusStopTask3 task = new BusStopTask3();
+
+        Callback<ListView<BusStopInfo>, ListCell<BusStopInfo>> factory = list -> new ListCell<>() {
+            @Override
+            protected void updateItem(BusStopInfo item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? "" : item.getName());
+            }
+        };
+        bsComboBox.setCellFactory(factory);
+        bsComboBox.setButtonCell(factory.call(null));
 
         task.setOnSucceeded(workerStateEvent ->
                 {

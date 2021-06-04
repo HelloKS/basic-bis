@@ -1,27 +1,21 @@
 package kumoh.basicbis.util;
 
 import javafx.concurrent.Task;
-import kumoh.basicbis.persistence.BusStopInfo;
-import kumoh.basicbis.persistence.Food;
+import kumoh.basicbis.persistence.FoodInfo;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FoodTask extends Task<List<Food>> {
+public class FoodTask extends Task<List<FoodInfo>> {
 
     RequestManager manager = new RequestManager();
-    private final List<Food> list = new ArrayList<>();
+    private final List<FoodInfo> list = new ArrayList<>();
     String query = "";
 
     public FoodTask(String query) { this.query = query; }
 
     @Override
-    protected List<Food> call() throws Exception {
+    protected List<FoodInfo> call() throws Exception {
 
         String response = manager.sendRequest("3,1," + query + "\r\n");
         System.out.println("[FoodTask] 받은 답변: " + response);
@@ -30,7 +24,7 @@ public class FoodTask extends Task<List<Food>> {
 
         for (int i = 0; i < responseSplit.length; i++) {
             String[] lineSplit = responseSplit[i].split(",");
-            Food food = new Food();
+            FoodInfo food = new FoodInfo();
 
             food.setUid(Integer.parseInt(lineSplit[0]));
             food.setName(lineSplit[1]);

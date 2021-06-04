@@ -3,48 +3,38 @@ package kumoh.basicbis;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.util.Callback;
 import kumoh.basicbis.persistence.BusStopInfo;
-import kumoh.basicbis.persistence.Food;
-import kumoh.basicbis.persistence.RouteInfo;
-import kumoh.basicbis.persistence.TimeTableInfo;
-import kumoh.basicbis.util.BusStopTask3;
+import kumoh.basicbis.persistence.FoodInfo;
 import kumoh.basicbis.util.FoodTask;
-import kumoh.basicbis.util.TimetableTask;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class FoodRecomController implements Initializable {
-    @FXML
-    private ComboBox<BusStopInfo> bsComboBox = new ComboBox<>();
-    @FXML
-    private Button bsBt;
-    @FXML
-    private TableView<Food> foodTableView = new TableView<>();
+    @FXML private TableView<FoodInfo> foodTableView = new TableView<>();
+    @FXML private Label name;
 
     private BusStopInfo busStopInfo;
     private ObservableList<BusStopInfo> list = FXCollections.observableArrayList();
-    private ObservableList<Food> foodList = FXCollections.observableArrayList();
+    private ObservableList<FoodInfo> foodList = FXCollections.observableArrayList();
 
     public TableColumn[] getColumns() {
-        final TableColumn<Food, String> foodNameColumn = new TableColumn<>("업소명");
+        final TableColumn<FoodInfo, String> foodNameColumn = new TableColumn<>("업소명");
         foodNameColumn.setCellValueFactory(item -> {
             return new ReadOnlyStringWrapper(item.getValue().getName());
         });
-        foodNameColumn.setPrefWidth(134);
+        foodNameColumn.setPrefWidth(130);
 
-        final TableColumn<Food, String> foodAddressColumn = new TableColumn<>("주소(도로명)");
+        final TableColumn<FoodInfo, String> foodAddressColumn = new TableColumn<>("도로명 주소");
         foodAddressColumn.setCellValueFactory(item -> {
             return new ReadOnlyStringWrapper(item.getValue().getAddress());
         });
-        foodAddressColumn.setPrefWidth(250);
+        foodAddressColumn.setPrefWidth(350);
 
-        final TableColumn<Food, String> foodPhoneColumn = new TableColumn<>("연락처");
+        final TableColumn<FoodInfo, String> foodPhoneColumn = new TableColumn<>("전화번호");
         foodPhoneColumn.setCellValueFactory(item -> {
             return new ReadOnlyStringWrapper(item.getValue().getPhone());
         });
@@ -58,13 +48,15 @@ public class FoodRecomController implements Initializable {
     }
 
     public void searchFood(BusStopInfo selection) {
+        name.setText(selection.getName());
+
         busStopInfo = selection;
         String query = Integer.toString(selection.getServiceId());
         foodTableView.getColumns().setAll(getColumns());
 
         FoodTask task = new FoodTask(query);
         task.setOnSucceeded(workerStateEvent -> {
-                    for (Food entry : task.getValue()) {
+                    for (FoodInfo entry : task.getValue()) {
                         foodTableView.getItems().add(entry);
                     }
                 }

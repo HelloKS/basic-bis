@@ -20,6 +20,7 @@ public class App extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/maindisplay.fxml"));
         scene = new Scene(root, 400, 300);
         stage.resizableProperty().setValue(false);
+        stage.setTitle("GUMI BIS");
         stage.setScene(scene);
         stage.show();
     }

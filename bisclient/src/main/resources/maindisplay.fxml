@@ -51,6 +51,9 @@
    <bottom>
       <HBox alignment="CENTER">
          <Label text="김태훈 박인태 최연웅"/>
+         <padding>
+            <Insets topRightBottomLeft="10"/>
+         </padding>
       </HBox>
    </bottom>
 </BorderPane>

@@ -1,7 +1,7 @@
 package kumoh.basicbis.persistence;
 
 
-public class Food {
+public class FoodInfo {
     private int uid;
     private String name;
     private String address;
@@ -9,10 +9,10 @@ public class Food {
     private double mapx;
     private double mapy;
 
-    public Food() {
+    public FoodInfo() {
     }
 
-    public Food(int uid, String name, String address, String phone, double mapx, double mapy) {
+    public FoodInfo(int uid, String name, String address, String phone, double mapx, double mapy) {
         this.uid = uid;
         this.name = name;
         this.address = address;

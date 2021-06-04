@@ -8,19 +8,32 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kumoh.basicbis.FoodRecomController">
-   <children>
-      <Label layoutX="64.0" layoutY="146.0" text="음식점 정보">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <TableView fx:id="foodTableView" layoutX="64.0" layoutY="169.0" prefHeight="204.0" prefWidth="484.0">
-        <columns>
-          <TableColumn prefWidth="140.0" text="업소명" />
-          <TableColumn prefWidth="200.0" text="주소(도로명)" />
-            <TableColumn prefWidth="144.0" text="소재지전화" />
-        </columns>
-      </TableView>
-   </children>
-</AnchorPane>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kumoh.basicbis.FoodRecomController">
+    <top>
+        <HBox alignment="CENTER">
+            <children>
+                <VBox alignment="CENTER">
+                    <children>
+                        <Label layoutX="231.0" layoutY="14.0" text="주변 음식점">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="name"/>
+                    </children>
+                </VBox>
+            </children>
+            <padding>
+                <Insets top="10" bottom="10"/>
+            </padding>
+        </HBox>
+    </top>
+    <center>
+        <TableView fx:id="foodTableView"/>
+    </center>
+</BorderPane>

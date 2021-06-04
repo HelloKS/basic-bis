@@ -53,7 +53,7 @@ public class TimetableController implements Initializable {
                 if (isEmpty() || index < 0) {
                     setText(null);
                 } else {
-                    setText(Integer.toString(index));
+                    setText(Integer.toString(index + 1));
                 }
             }
         });
@@ -63,7 +63,6 @@ public class TimetableController implements Initializable {
             SimpleDateFormat format = new SimpleDateFormat("HH:mm");
             return new ReadOnlyStringWrapper(format.format(item.getValue().getStartTime()));
         });
-        timeColumn.setPrefWidth(100);
 
         return new TableColumn[]{indexColumn, timeColumn};
     }

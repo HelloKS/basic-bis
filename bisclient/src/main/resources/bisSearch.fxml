@@ -9,7 +9,7 @@
    <children>
       <TabPane layoutX="14.0" layoutY="45.0" prefHeight="400.0" prefWidth="582.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="경로">
+          <Tab text="경로 검색">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -27,36 +27,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="정류장">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TextField fx:id="bsTextField" layoutX="14.0" layoutY="56.0" prefHeight="23.0" prefWidth="180.0" />
-                        <Button fx:id="bsBt" layoutX="205.0" layoutY="56.0" mnemonicParsing="false" onAction="#bsBt" text="검색" />
-                        <ListView fx:id="bsListView1" layoutX="12.0" layoutY="92.0" onMouseClicked="#bsSelected" prefHeight="229.0" prefWidth="226.0" />
-                        <CheckBox fx:id="stopName" layoutX="14.0" layoutY="25.0" mnemonicParsing="false" onAction="#selectName" text="정류장 이름" />
-                        <CheckBox fx:id="stopNumber" layoutX="125.0" layoutY="25.0" mnemonicParsing="false" onAction="#selectNumber" text="정류장 번호" />
-                        <Label layoutX="276.0" layoutY="18.0" text="경유 버스 번호 목록" />
-                        <ListView fx:id="bsListView2" layoutX="276.0" layoutY="41.0" prefHeight="279.0" prefWidth="277.0" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-            <Tab text="노선">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="256.0" prefWidth="200.0">
-                     <children>
-                        <Label layoutX="7.0" layoutY="14.0" text="검색 :" />
-                        <TextField layoutX="47.0" layoutY="10.0" promptText="버스번호를 적어주세요" />
-                        <Button layoutX="195.0" layoutY="10.0" mnemonicParsing="false" text="검색" />
-                        <ListView layoutX="14.0" layoutY="41.0" prefHeight="289.0" prefWidth="222.0" />
-                        <ListView layoutX="301.0" layoutY="41.0" prefHeight="290.0" prefWidth="252.0" />
-                        <Button layoutX="501.0" layoutY="10.0" mnemonicParsing="false" text="시간표" />
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-            <Tab text="노선추천">
+            <Tab text="노선 추천">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>

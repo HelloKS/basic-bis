@@ -15,6 +15,10 @@ public class RouteTask extends Task<List<RouteInfo>> {
     private final List<RouteInfo> list = new ArrayList<>();
     String query = "";
 
+    public RouteTask() {}
+
+    public RouteTask(String query) { this.query = query;}
+
     @Override
     protected List<RouteInfo> call() throws Exception {
 

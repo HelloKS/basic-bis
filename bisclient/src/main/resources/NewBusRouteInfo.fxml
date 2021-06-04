@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="kumoh.basicbis.NewBusRouteInfoController">
+    <center>
+        <SplitPane id="splitPane" dividerPositions="0.3">
+            <items>
+                <VBox spacing="5">
+                    <children>
+                        <HBox>
+                            <children>
+                                <TextField HBox.hgrow="ALWAYS" fx:id="searchField" promptText="노선 이름 (예: 191)"/>
+                                <Button fx:id="searchBtn" text="검색" onAction="#searchStop"/>
+                            </children>
+                        </HBox>
+                        <Button HBox.hgrow="ALWAYS" maxWidth="Infinity" fx:id="showAll" text="전체 노선 보기" onAction="#showAll"/>
+                        <ListView VBox.vgrow="ALWAYS" fx:id="routeList"/>
+                    </children>
+                </VBox>
+                <BorderPane>
+                    <top>
+                        <VBox alignment="CENTER">
+                            <children>
+                                <Label fx:id="routeName" text="운행 노선을 선택해주세요">
+                                    <font>
+                                        <Font size="20"/>
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                    </top>
+                    <center>
+                        <TableView fx:id="routeLinkList"/>
+                    </center>
+                    <bottom>
+                        <HBox alignment="CENTER" spacing="10">
+                            <children>
+                                <Button fx:id="showTimetable" text="기점 출발 시간"/>
+                                <Button fx:id="showRunningBus" text="버스 운행정보"/>
+                            </children>
+                            <HBox.margin>
+                                <Insets bottom="10"/>
+                            </HBox.margin>
+                        </HBox>
+                    </bottom>
+                </BorderPane>
+            </items>
+        </SplitPane>
+    </center>
+</BorderPane>

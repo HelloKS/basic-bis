@@ -18,6 +18,9 @@
             </content>
         </Tab>
         <Tab text="버스 노선">
+            <content>
+                <fx:include source="NewBusRouteInfo.fxml"/>
+            </content>
         </Tab>
     </tabs>
 </TabPane>

@@ -140,6 +140,7 @@ public class NewBusRouteInfoController implements Initializable {
         RouteLinkTask task = new RouteLinkTask(route.getUid());
 
         task.setOnSucceeded(workerStateEvent -> {
+            routeLinkTable.getItems().clear();
             for (RouteLinkInfo entry : task.getValue()) {
                 routeLinkTable.getItems().add(entry);
             }

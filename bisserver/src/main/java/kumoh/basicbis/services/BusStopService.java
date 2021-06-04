@@ -49,7 +49,11 @@ public class BusStopService implements BaseService {
 
         switch (code) {
             case BUS_STOP_BY_BUS_NAME:
-                result = busStopListProvider(parsedText[Indicator.BUS_STOP_NAME.value]);
+                if (parsedText.length == 2) {
+                    result = busStopListProvider("");
+                } else {
+                    result = busStopListProvider(parsedText[Indicator.BUS_STOP_NAME.value]);
+                }
                 break;
             case BUS_STOP_BY_UID:
                 result = busStopProvider(parsedText[Indicator.BUS_STOP_UID.value]);

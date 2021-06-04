@@ -12,7 +12,7 @@ public class RouteDAO extends BaseDAOImpl{
     검색으로 노선을 불러옵니다. 키워드가 없을 경우 전체 노선을 리턴합니다.
      */
     public ArrayList<RouteDTO> getRouteByName(String searchQuery) {
-        String query = "SELECT * FROM gumibis.bus_route WHERE rt_name LIKE ?";
+        String query = "SELECT * FROM gumibis.bus_route WHERE rt_id LIKE ?";
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         ArrayList<RouteDTO> list = new ArrayList<>();

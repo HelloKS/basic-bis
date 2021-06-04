@@ -9,17 +9,25 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kumoh.basicbis.MainController">
-   <children>
-      <Button fx:id="search_btn" layoutX="247.0" layoutY="167.0" mnemonicParsing="false" onAction="#openSearch" prefHeight="67.0" prefWidth="108.0" text="버스 정보 검색" />
-      <Button fx:id="rt_btn" layoutX="138.0" layoutY="234.0" mnemonicParsing="false" onAction="#openRT" prefHeight="67.0" prefWidth="108.0" text="정류장/노선 안내" />
-      <Button fx:id="tt_btn" layoutX="30.0" layoutY="167.0" mnemonicParsing="false" onAction="#openTT" prefHeight="67.0" prefWidth="108.0" text="버스 시간표 안내" />
-      <Button fx:id="bs_btn" layoutX="354.0" layoutY="234.0" mnemonicParsing="false" onAction="#openBS" prefHeight="67.0" prefWidth="108.0" text="경유 정류장 안내" />
-      <Button fx:id="fd_btn" layoutX="462.0" layoutY="167.0" mnemonicParsing="false" onAction="#openFD" prefHeight="67.0" prefWidth="108.0" text="음식점 추천" />
-      <Label layoutX="236.0" layoutY="53.0" text="GUMI BIS">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Label>
-   </children>
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kumoh.basicbis.MainController">
+   <top>
+      <VBox alignment="CENTER">
+         <children>
+            <Label text="GUMI BIS">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <Label text="창의프로젝트 8팀"/>
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <HBox alignment="CENTER" spacing="10">
+         <children>
+            <Button fx:id="search_btn" onAction="#openSearch" prefHeight="67.0" prefWidth="108.0" text="버스 정보 검색" />
+            <Button fx:id="rt_btn" onAction="#openRT" prefHeight="67.0" prefWidth="108.0" text="정류장/노선 안내" />
+         </children>
+      </HBox>
+   </center>
+</BorderPane>

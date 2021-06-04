@@ -7,14 +7,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import kumoh.basicbis.persistence.BusStopInfo;
+import kumoh.basicbis.persistence.RouteInfo;
 import kumoh.basicbis.util.BusStopTask;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -86,6 +92,30 @@ public class NewBusStopInfoController implements Initializable {
     public void searchStop(ActionEvent actionEvent) {
         if (!searchField.getText().isBlank()) {
             searchStop(searchField.getText());
+        }
+    }
+
+    public void openFoodRecom(ActionEvent actionEvent) {
+        Parent root;
+        try {
+            BusStopInfo busStop = stopList.getSelectionModel().getSelectedItem();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/foodRecom.fxml"));
+            root = (Parent) loader.load();
+
+            FoodRecomController controller = loader.getController();
+            controller.searchFood(busStop);
+
+            Scene scene = new Scene(root);
+
+            Stage stage = new Stage();
+            stage.setTitle("주변 음식점");
+            stage.setScene(scene);
+
+            stage.resizableProperty().setValue(false);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

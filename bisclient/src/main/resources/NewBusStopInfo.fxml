@@ -47,7 +47,7 @@
                         <HBox alignment="CENTER" spacing="10">
                             <children>
                                 <Button fx:id="showRoute" text="경유 노선"/>
-                                <Button fx:id="showFood" text="주변 음식점"/>
+                                <Button fx:id="showFood" text="주변 음식점" onAction="#openFoodRecom"/>
                                 <Button fx:id="showComingBus" text="버스 도착정보"/>
                             </children>
                             <HBox.margin>

@@ -1,5 +1,6 @@
 package kumoh.basicbis;
 
+import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -17,8 +18,12 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import kumoh.basicbis.persistence.BusStopInfo;
 import kumoh.basicbis.persistence.RouteInfo;
+import kumoh.basicbis.persistence.RouteLinkInfo;
+import kumoh.basicbis.persistence.TimeTableInfo;
 import kumoh.basicbis.util.BusStopTask;
+import kumoh.basicbis.util.RouteLinkTask;
 import kumoh.basicbis.util.RouteTask;
+import kumoh.basicbis.util.TimetableTask;
 
 import java.io.IOException;
 import java.net.URL;
@@ -30,7 +35,7 @@ public class NewBusRouteInfoController implements Initializable {
     @FXML TextField searchField;
     @FXML Button showTimetable;
     @FXML Button showRunningBus;
-    @FXML TableView<BusStopInfo> routeLinkTable;
+    @FXML TableView<RouteLinkInfo> routeLinkTable;
     @FXML Label routeName;
 
     private ObservableList<RouteInfo> list;
@@ -52,9 +57,11 @@ public class NewBusRouteInfoController implements Initializable {
                 if (newValue == null) {
                     // 뭔가의 사유로 리스트 선택이 풀리면 (ex. 검색 새로 함) 옆에 다 지움
                     routeName.setText("운행 노선을 선택해주세요");
+                    routeLinkTable.getItems().clear();
                 } else {
                     // 옆쪽에 경유정류장과 이름을 띄움
                     routeName.setText(newValue.getId() + " (" +newValue.getName() + ")");
+                    getRouteLink(newValue);
                 }
             }
         });
@@ -68,21 +75,11 @@ public class NewBusRouteInfoController implements Initializable {
     }
 
     public TableColumn[] getColumns() {
-        final TableColumn<Void, String> indexColumn = new TableColumn<>("운행 순번");
-        indexColumn.setCellFactory(item -> new TableCell<>() {
-            @Override
-            public void updateIndex(int index) {
-                super.updateIndex(index);
-                if (isEmpty() || index < 0) {
-                    setText(null);
-                } else {
-                    setText(Integer.toString(index));
-                }
-            }
-        });
+        final TableColumn<RouteLinkInfo, String> indexColumn = new TableColumn<>("운행 순번");
+        indexColumn.setCellValueFactory(item -> new ReadOnlyStringWrapper(item.getValue().getRouteOrder() + 1 + ""));
 
-        final TableColumn<BusStopInfo, String> busStopColumn = new TableColumn<>("정차 정류장");
-        busStopColumn.setCellValueFactory(item -> new ReadOnlyStringWrapper(item.getValue().getName()));
+        final TableColumn<RouteLinkInfo, String> busStopColumn = new TableColumn<>("정차 정류장");
+        busStopColumn.setCellValueFactory(item -> new ReadOnlyStringWrapper(item.getValue().getBusStopName()));
         busStopColumn.setPrefWidth(400);
 
         return new TableColumn[]{indexColumn, busStopColumn};
@@ -137,5 +134,19 @@ public class NewBusRouteInfoController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void getRouteLink(RouteInfo route) {
+        RouteLinkTask task = new RouteLinkTask(route.getUid());
+
+        task.setOnSucceeded(workerStateEvent -> {
+            for (RouteLinkInfo entry : task.getValue()) {
+                routeLinkTable.getItems().add(entry);
+            }
+        });
+
+        Thread thread = new Thread(task, "routelinklist-thread");
+        thread.setDaemon(true);
+        thread.start();
     }
 }

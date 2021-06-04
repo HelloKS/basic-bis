@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class MainController {
     
-    //버스정보검색
+    //조건 검색(경로추천, 내위치기반정류장)
     @FXML protected void openSearch(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/bisSearch.fxml"));
@@ -19,7 +19,7 @@ public class MainController {
             Scene scene = new Scene(root);
 
             Stage stage = new Stage();
-            stage.setTitle("버스 정보 검색");
+            stage.setTitle("조건 검색");
             stage.setScene(scene);
             stage.resizableProperty().setValue(false);
             stage.show();
@@ -29,7 +29,7 @@ public class MainController {
 
     }
 
-    //버스 노선 검색
+    //버스 안내 (노선/정류장)
     @FXML protected void openRT(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/NewInfoWindow.fxml"));
@@ -37,58 +37,7 @@ public class MainController {
             Scene scene = new Scene(root);
 
             Stage stage = new Stage();
-            stage.setTitle("정류장 / 노선 정보");
-            stage.setScene(scene);
-            stage.resizableProperty().setValue(false);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    //버스 시간표 검색
-    @FXML protected void openTT(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/busSchedule.fxml"));
-            Parent root = (Parent) loader.load();
-            Scene scene = new Scene(root);
-
-            Stage stage = new Stage();
-            stage.setTitle("버스 시간표 검색");
-            stage.setScene(scene);
-            stage.resizableProperty().setValue(false);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    //경유 정류장 안내
-    @FXML protected void openBS(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/busStopInfo.fxml"));
-            Parent root = (Parent) loader.load();
-            Scene scene = new Scene(root);
-
-            Stage stage = new Stage();
-            stage.setTitle("경유 정류장 안내");
-            stage.setScene(scene);
-            stage.resizableProperty().setValue(false);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    //음식점 추천
-    @FXML protected void openFD(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/foodRecom.fxml"));
-            Parent root = (Parent) loader.load();
-            Scene scene = new Scene(root);
-
-            Stage stage = new Stage();
-            stage.setTitle("음식점 추천");
+            stage.setTitle("버스 안내");
             stage.setScene(scene);
             stage.resizableProperty().setValue(false);
             stage.show();

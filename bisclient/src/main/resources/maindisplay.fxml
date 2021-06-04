@@ -9,7 +9,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kumoh.basicbis.MainController">
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kumoh.basicbis.MainController">
    <top>
       <VBox alignment="CENTER">
          <children>
@@ -25,9 +27,30 @@
    <center>
       <HBox alignment="CENTER" spacing="10">
          <children>
-            <Button fx:id="search_btn" onAction="#openSearch" prefHeight="67.0" prefWidth="108.0" text="버스 정보 검색" />
-            <Button fx:id="rt_btn" onAction="#openRT" prefHeight="67.0" prefWidth="108.0" text="정류장/노선 안내" />
+            <Button fx:id="search_btn" onAction="#openSearch" contentDisplay="TOP" text="조건 검색">
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="@icons/magnify.png"/>
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="rt_btn" onAction="#openRT" contentDisplay="TOP" text="버스 안내">
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="@icons/bus-stop.png"/>
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </HBox>
    </center>
+   <bottom>
+      <HBox alignment="CENTER">
+         <Label text="김태훈 박인태 최연웅"/>
+      </HBox>
+   </bottom>
 </BorderPane>

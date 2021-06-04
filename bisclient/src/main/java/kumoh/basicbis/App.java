@@ -18,7 +18,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/maindisplay.fxml"));
-        scene = new Scene(root, 640, 400);
+        scene = new Scene(root, 400, 300);
         stage.resizableProperty().setValue(false);
         stage.setScene(scene);
         stage.show();

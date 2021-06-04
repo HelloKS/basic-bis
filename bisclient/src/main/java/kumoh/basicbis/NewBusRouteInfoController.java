@@ -1,20 +1,26 @@
 package kumoh.basicbis;
 
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import kumoh.basicbis.persistence.BusStopInfo;
 import kumoh.basicbis.persistence.RouteInfo;
 import kumoh.basicbis.util.BusStopTask;
 import kumoh.basicbis.util.RouteTask;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -24,7 +30,7 @@ public class NewBusRouteInfoController implements Initializable {
     @FXML TextField searchField;
     @FXML Button showTimetable;
     @FXML Button showRunningBus;
-    @FXML TableView<BusStopInfo> routeLinkList;
+    @FXML TableView<BusStopInfo> routeLinkTable;
     @FXML Label routeName;
 
     private ObservableList<RouteInfo> list;
@@ -48,13 +54,38 @@ public class NewBusRouteInfoController implements Initializable {
                     routeName.setText("운행 노선을 선택해주세요");
                 } else {
                     // 옆쪽에 경유정류장과 이름을 띄움
-                    routeName.setText(newValue.getName());
+                    routeName.setText(newValue.getId() + " (" +newValue.getName() + ")");
                 }
             }
         });
 
+        // 옆쪽 경유하는 버스 정류장 테이블 행 만들어 줌
+        routeLinkTable.getColumns().setAll(getColumns());
+
+
         // 전체 버스정류장 목록 표시해 줌
         searchRoute("");
+    }
+
+    public TableColumn[] getColumns() {
+        final TableColumn<Void, String> indexColumn = new TableColumn<>("운행 순번");
+        indexColumn.setCellFactory(item -> new TableCell<>() {
+            @Override
+            public void updateIndex(int index) {
+                super.updateIndex(index);
+                if (isEmpty() || index < 0) {
+                    setText(null);
+                } else {
+                    setText(Integer.toString(index));
+                }
+            }
+        });
+
+        final TableColumn<BusStopInfo, String> busStopColumn = new TableColumn<>("정차 정류장");
+        busStopColumn.setCellValueFactory(item -> new ReadOnlyStringWrapper(item.getValue().getName()));
+        busStopColumn.setPrefWidth(400);
+
+        return new TableColumn[]{indexColumn, busStopColumn};
     }
 
     private void searchRoute(String query) {
@@ -81,6 +112,30 @@ public class NewBusRouteInfoController implements Initializable {
     public void searchStop(ActionEvent actionEvent) {
         if (!searchField.getText().isBlank()) {
             searchRoute(searchField.getText());
+        }
+    }
+
+    public void openTimetable(ActionEvent actionEvent) {
+        Parent root;
+        try {
+            RouteInfo route = routeList.getSelectionModel().getSelectedItem();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/busTimeTable.fxml"));
+            root = (Parent) loader.load();
+
+            TimetableController controller = loader.getController();
+            controller.initData(route);
+
+            Scene scene = new Scene(root);
+
+            Stage stage = new Stage();
+            stage.setTitle("기점 출발 시간표");
+            stage.setScene(scene);
+
+            stage.resizableProperty().setValue(false);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

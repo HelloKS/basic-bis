@@ -21,7 +21,8 @@ public class RouteService implements BaseService{
         UNKNOWN(0),
         ROUTE_LIST(1),
         TIMETABLE(2),
-        BUS_ALL_DETAIL(3);
+        BUS_ALL_DETAIL(3),
+        ROUTE_LINK(4);
 
         private final int value;
         ServiceType(int value){
@@ -31,6 +32,7 @@ public class RouteService implements BaseService{
     BusDAO busDAO = new BusDAO();
     TimeTableDAO timeTableDAO = new TimeTableDAO();
     RouteDAO routeDAO = new RouteDAO();
+    RouteLinkDAO linkDAO = new RouteLinkDAO();
 
     /*
     * result example
@@ -62,6 +64,8 @@ public class RouteService implements BaseService{
             case BUS_ALL_DETAIL:
                 result = busAllDetailProvider(reqText_split[Indicator.BUS_UID.value]);
                 break;
+            case ROUTE_LINK:
+                result = routeLinkListProvider(reqText_split[2]);
             default:
                 break;
         }
@@ -81,6 +85,20 @@ public class RouteService implements BaseService{
 
         return sbuilder.toString();
     }
+
+    private String routeLinkListProvider(String query) {
+        ArrayList<RouteLinkDTO> routeLinks;
+        StringBuilder sbuilder = new StringBuilder();
+
+        routeLinks = linkDAO.getRouteLink(query);
+
+        for (RouteLinkDTO route : routeLinks) {
+            sbuilder.append(route.toString()).append("\r\n");
+        }
+
+        return sbuilder.toString();
+    }
+
     private String busAllDetailProvider(String requestBody){
         ArrayList<BusDTO> busDTOArrayList;
         ArrayList<TimeTableDTO> timeTableDTOList;

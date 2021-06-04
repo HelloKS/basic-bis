@@ -5,46 +5,46 @@ import java.io.Serializable;
 
 // RouteLink: 노선 경로
 public class RouteLinkDTO implements Serializable {
-    private String busId;
-    private String busStopId;
-    private int routeNumber;
+    private int routeOrder;
+    private int busStopUid;
+    private String busStopName;
 
-    public RouteLinkDTO() {}
+    public RouteLinkDTO() { }
 
-    public RouteLinkDTO(String busId, String busStopId, int routeNumber) {
-        this.busId = busId;
-        this.busStopId = busStopId;
-        this.routeNumber = routeNumber;
+    public RouteLinkDTO(int routeOrder, int busStopUid, String busStopName) {
+        this.routeOrder = routeOrder;
+        this.busStopUid = busStopUid;
+        this.busStopName = busStopName;
     }
 
-    public String getBusId() {
-        return busId;
+    public int getRouteOrder() {
+        return routeOrder;
     }
 
-    public void setBusId(String busId) {
-        this.busId = busId;
+    public void setRouteOrder(int routeOrder) {
+        this.routeOrder = routeOrder;
     }
 
-    public String getBusStopId() {
-        return busStopId;
+    public int getBusStopUid() {
+        return busStopUid;
     }
 
-    public void setBusStopId(String busStopId) {
-        this.busStopId = busStopId;
+    public void setBusStopUid(int busStopUid) {
+        this.busStopUid = busStopUid;
     }
 
-    public int getRouteNumber() {
-        return routeNumber;
+    public String getBusStopName() {
+        return busStopName;
     }
 
-    public void setRouteNumber(int routeNumber) {
-        this.routeNumber = routeNumber;
+    public void setBusStopName(String busStopName) {
+        this.busStopName = busStopName;
     }
 
     @Override
     public String toString() {
-        return busId +"," +
-                busStopId + "," +
-                routeNumber + ",";
+        return routeOrder + "," +
+                busStopUid + "," +
+                busStopName;
     }
 }

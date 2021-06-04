@@ -9,13 +9,14 @@ public class RouteLinkDAO extends BaseDAOImpl{
     public RouteLinkDAO(){}
 
     /*
-    * 이건 어따 쓰지
-    * 노선의 UID를 가지고 route_link 테이블에서 검색(노선명,정류장번호,정류장 고유번호)
-    *
+    * 경유 정류장 반환
+    * 노선의 UID를 주면 다음을 리턴:
+    * 방문순서(rl_num), 버스정류장UID(st_uid), 버스정류장이름(st_name)
+    * (방문 순서로 정렬)
     * */
-    public ArrayList<RouteLinkDTO> getRouteLink(String busUid)
+    public ArrayList<RouteLinkDTO> getRouteLink(String routeUid)
     {
-        String sql="SELECT * FROM route_link WHERE rt_uid = ?";
+        String sql="SELECT rl.rl_num, rl.st_uid, bs.st_name FROM gumibis.route_link rl INNER JOIN gumibis.bus_stop bs ON rl.st_uid = bs.st_uid WHERE rl.rt_uid = ? ORDER BY rl.rl_num ASC";
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         ArrayList<RouteLinkDTO> list = new ArrayList<>();
@@ -23,14 +24,14 @@ public class RouteLinkDAO extends BaseDAOImpl{
         try{
             getConnection();
             statement = conn.prepareStatement(sql);
-            statement.setString(1,busUid);
+            statement.setString(1, routeUid);
             resultSet = statement.executeQuery();
             while(resultSet.next())
             {
                 RouteLinkDTO routeLinkDTO = new RouteLinkDTO();
-                routeLinkDTO.setBusId(resultSet.getString("rt_uid"));
-                routeLinkDTO.setRouteNumber(resultSet.getInt("rl_num"));
-                routeLinkDTO.setBusStopId(resultSet.getString("st_uid"));
+                routeLinkDTO.setRouteOrder(resultSet.getInt("rl_num"));
+                routeLinkDTO.setBusStopUid(resultSet.getInt("st_uid"));
+                routeLinkDTO.setBusStopName(resultSet.getString("st_name"));
                 list.add(routeLinkDTO);
             }
         }catch (SQLException se) {

@@ -10,7 +10,8 @@ public class RouteService implements BaseService{
     private enum Indicator {
         CODE(1),
         BUS_NAME(2),
-        BUS_UID(2);
+        BUS_UID(2),
+        BUS_STOP_SERVICE_ID(2);
         private final int value;
 
         Indicator(int value) {
@@ -22,7 +23,8 @@ public class RouteService implements BaseService{
         ROUTE_LIST(1),
         TIMETABLE(2),
         BUS_ALL_DETAIL(3),
-        ROUTE_LINK(4);
+        ROUTE_LINK(4),
+        BUS_ON_BUS_STOP(5);
 
         private final int value;
         ServiceType(int value){
@@ -45,7 +47,6 @@ public class RouteService implements BaseService{
         ServiceType svcType = ServiceType.UNKNOWN;
 
         String[] reqText_split = reqText.split(",");
-
         try {
             int svc = Integer.parseInt(reqText_split[Indicator.CODE.value]);
             svcType = ServiceType.values()[svc];
@@ -66,6 +67,8 @@ public class RouteService implements BaseService{
                 break;
             case ROUTE_LINK:
                 result = routeLinkListProvider(reqText_split[2]);
+            case BUS_ON_BUS_STOP:
+                result = busOnBusStopProvider(reqText_split[Indicator.BUS_STOP_SERVICE_ID.value]);
             default:
                 break;
         }
@@ -115,6 +118,17 @@ public class RouteService implements BaseService{
         }
         stringBuilder.append(routeDAO.getRouteByBusId(requestBody)).append("\r\n");
 
+        return stringBuilder.toString();
+    }
+
+    private String busOnBusStopProvider(String requestBody){
+        ArrayList<BusDTO> busDTOArrayList;
+        StringBuilder stringBuilder = new StringBuilder();
+
+        busDTOArrayList = routeDAO.getBusByBusStop(requestBody);
+        for(BusDTO index : busDTOArrayList){
+            stringBuilder.append(index.toString()).append("\r\n");
+        }
         return stringBuilder.toString();
     }
 }

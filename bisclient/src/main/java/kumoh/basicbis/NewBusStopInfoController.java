@@ -16,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import kumoh.basicbis.persistence.BusInfo;
 import kumoh.basicbis.persistence.BusStopInfo;
 import kumoh.basicbis.persistence.RouteInfo;
 import kumoh.basicbis.util.BusStopTask;
@@ -105,6 +106,30 @@ public class NewBusStopInfoController implements Initializable {
     public void searchStop(ActionEvent actionEvent) {
         if (!searchField.getText().isBlank()) {
             searchStop(searchField.getText());
+        }
+    }
+
+    public void openRouteOnBusStop(ActionEvent actionEvent){
+        Parent root;
+        try{
+            BusStopInfo busStop = stopList.getSelectionModel().getSelectedItem();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/routeOnBusStop.fxml"));
+            root = (Parent) loader.load();
+
+            routeOnBusStopController controller = loader.getController();
+            controller.searchBus(busStop);
+
+            Scene scene = new Scene(root);
+
+            Stage stage = new Stage();
+            stage.setTitle("경유 노선");
+            stage.setScene(scene);
+
+            stage.resizableProperty().setValue(false);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

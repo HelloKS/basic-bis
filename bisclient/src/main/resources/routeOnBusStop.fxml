@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="kumoh.basicbis.routeOnBusStopController"
+            prefHeight="400.0" prefWidth="600.0">
+    <top>
+        <HBox alignment="CENTER">
+            <children>
+                <VBox alignment="CENTER">
+                    <children>
+                        <Label layoutX="231.0" layoutY="14.0" text="경유 노선">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="name"/>
+                    </children>
+                </VBox>
+            </children>
+            <padding>
+                <Insets top="10" bottom="10"/>
+            </padding>
+        </HBox>
+    </top>
+    <center>
+        <TableView fx:id="busInfoTableView"/>
+    </center>
+</BorderPane>

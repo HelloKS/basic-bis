@@ -100,6 +100,7 @@ public class BusDAO extends BaseDAOImpl{
         try{
             getConnection();
             statement = conn.prepareStatement(sql);
+            statement.setString(1,id);
             resultSet = statement.executeQuery();
             while(resultSet.next())
             {

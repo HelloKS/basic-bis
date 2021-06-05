@@ -103,4 +103,40 @@ public class RouteDAO extends BaseDAOImpl{
         }
         return result;
     }
+
+    public ArrayList<BusDTO> getBusByBusStop(String busStopSVCID){
+        String query = "select * from bus_route where rt_uid IN (" +
+                "select rt_uid from route_link where st_uid in " +
+                "(select st_uid from bus_stop where st_svcid = ?))";
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        ArrayList<BusDTO> list = new ArrayList<>();
+
+        try{
+            getConnection();
+            statement = conn.prepareStatement(query);
+            statement.setString(1, busStopSVCID);
+            resultSet = statement.executeQuery();
+
+            while(resultSet.next())
+            {
+                BusDTO busDTO = new BusDTO();
+                busDTO.setUid(resultSet.getString("rt_uid"));
+                busDTO.setId(resultSet.getString("rt_id"));
+                busDTO.setName(resultSet.getString("rt_name"));
+                list.add(busDTO);
+            }
+        }catch (SQLException se) {
+            se.printStackTrace();
+        }finally {
+            try{
+                if(resultSet != null) resultSet.close();
+                if(statement != null) statement.close();
+                if(conn != null) conn.close();
+            }catch (Exception e){
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return list;
+    }
 }

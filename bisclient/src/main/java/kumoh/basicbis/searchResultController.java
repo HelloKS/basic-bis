@@ -16,12 +16,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class searchResultController implements Initializable {
-    @FXML
-    private TableView<BusInfo> busTableView = new TableView<>();
-    @FXML
-    private Label name;
-    @FXML
-    private Label subject;
+    @FXML private TableView<BusInfo> busTableView = new TableView<>();
+    @FXML private Label name;
+    @FXML private Label subject;
 
     private BusStopInfo start;
     private BusStopInfo end;
@@ -39,18 +36,33 @@ public class searchResultController implements Initializable {
                 }
             }
         });
+        indexColumn.setPrefWidth(100);
 
         final TableColumn<BusInfo, String> busId = new TableColumn<>("버스번호");
         busId.setCellValueFactory(item -> {
             return new ReadOnlyStringWrapper(item.getValue().getId());
         });
-        busId.setPrefWidth(130);
+        busId.setPrefWidth(100);
 
         final TableColumn<BusInfo, String> busNameColumn = new TableColumn<>("버스노선명");
         busNameColumn.setCellValueFactory(item -> {
             return new ReadOnlyStringWrapper(item.getValue().getName());
         });
-        busNameColumn.setPrefWidth(350);
+        busNameColumn.setPrefWidth(250);
+
+        if(subject.getText() =="경로 검색 결과"){
+            return new TableColumn[]{indexColumn, busId, busNameColumn};
+        }
+        else if(subject.getText() == "노선 추천 결과"){
+
+            final TableColumn<BusInfo, String> busNumber = new TableColumn<>("경유 정류장 수");
+            busNumber.setCellValueFactory(item -> {
+                return new ReadOnlyStringWrapper(item.getValue().getUid());
+            });
+            busNumber.setPrefWidth(150);
+
+            return new TableColumn[]{indexColumn, busId, busNameColumn, busNumber};
+        }
         return new TableColumn[]{indexColumn, busId, busNameColumn};
     }
 

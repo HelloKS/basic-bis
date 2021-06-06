@@ -136,6 +136,13 @@ public class BusService implements BaseService {
             countIndex++;
         }
 
+//        stringBuilder.append(list.get(firstIndex).toString()).append(",").append(first).append("\r\n");
+//        stringBuilder.append(list.get(secondIndex).toString()).append(",").append(second).append("\r\n");
+//        stringBuilder.append(list.get(thirdIndex).toString()).append(",").append(third).append("\r\n");
+
+        list.get(firstIndex).setUid(Integer.toString(first));
+        list.get(secondIndex).setUid(Integer.toString(second));
+        list.get(thirdIndex).setUid(Integer.toString(third));
         stringBuilder.append(list.get(firstIndex).toString()).append("\r\n");
         stringBuilder.append(list.get(secondIndex).toString()).append("\r\n");
         stringBuilder.append(list.get(thirdIndex).toString()).append("\r\n");

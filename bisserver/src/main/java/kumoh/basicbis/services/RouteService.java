@@ -67,8 +67,10 @@ public class RouteService implements BaseService{
                 break;
             case ROUTE_LINK:
                 result = routeLinkListProvider(reqText_split[2]);
+                break;
             case BUS_ON_BUS_STOP:
                 result = busOnBusStopProvider(reqText_split[Indicator.BUS_STOP_SERVICE_ID.value]);
+                break;
             default:
                 break;
         }

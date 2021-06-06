@@ -18,7 +18,7 @@ public class FoodTask extends Task<List<FoodInfo>> {
     protected List<FoodInfo> call() throws Exception {
 
         String response = manager.sendRequest("3,1," + query + "\r\n");
-        System.out.println("[FoodTask] 받은 답변: " + response);
+        //System.out.println("[FoodTask] 받은 답변: " + response);
 
         String[] responseSplit = response.split("\r\n");
 

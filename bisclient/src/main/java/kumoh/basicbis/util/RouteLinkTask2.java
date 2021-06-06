@@ -18,7 +18,7 @@ public class RouteLinkTask2 extends Task<List<BusInfo>> {
     protected List<BusInfo> call() throws Exception {
 
         String response = manager.sendRequest("2,5," + query + "\r\n");
-        System.out.println("[RouteTask2] 받은 답변: " + response);
+        //System.out.println("[RouteTask2] 받은 답변: " + response);
 
         String[] responseSplit = response.split("\r\n");
 

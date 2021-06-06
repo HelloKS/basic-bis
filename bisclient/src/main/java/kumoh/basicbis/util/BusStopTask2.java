@@ -17,7 +17,7 @@ public class BusStopTask2 extends Task<List<BusStopInfo>> {
     protected List<BusStopInfo> call() throws Exception {
 
         String response = manager.sendRequest("1,2," + query + "\r\n");
-        System.out.println("[BusStopTask2] 받은 답변: " + response);
+        //System.out.println("[BusStopTask2] 받은 답변: " + response);
 
         String[] responseSplit = response.split("\r\n");
 

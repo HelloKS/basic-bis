@@ -21,7 +21,7 @@ public class TimetableTask extends Task<List<TimeTableInfo>> {
     protected List<TimeTableInfo> call() throws Exception {
 
         String response = manager.sendRequest("4,1," + query + "\r\n");
-        System.out.println("[TimetableTask] 받은 답변: " + response);
+        //System.out.println("[TimetableTask] 받은 답변: " + response);
 
         // 놀랍게도 시간표가 없는 노선도 있음. (ex: 1-1, 차고지행) 이 경우 그냥 스킵
         if (response.isBlank()) return list;

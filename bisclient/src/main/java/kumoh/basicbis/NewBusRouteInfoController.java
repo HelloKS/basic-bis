@@ -34,7 +34,6 @@ public class NewBusRouteInfoController implements Initializable {
     @FXML ListView<RouteInfo> routeList;
     @FXML TextField searchField;
     @FXML Button showTimetable;
-    @FXML Button showRunningBus;
     @FXML TableView<RouteLinkInfo> routeLinkTable;
     @FXML Label routeName;
 
@@ -47,7 +46,6 @@ public class NewBusRouteInfoController implements Initializable {
 
         // 리스트 클릭 안되면 버튼 비활성화하게끔 지정
         showTimetable.disableProperty().bind(routeList.getSelectionModel().selectedItemProperty().isNull());
-        showRunningBus.disableProperty().bind(routeList.getSelectionModel().selectedItemProperty().isNull());
 
         // 리스트 선택한게 바뀌면 할 동작 설정
         routeList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<RouteInfo>() {

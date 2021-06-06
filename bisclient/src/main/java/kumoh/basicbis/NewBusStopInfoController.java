@@ -32,7 +32,6 @@ public class NewBusStopInfoController implements Initializable {
     @FXML TextField searchField;
     @FXML Button showRoute;
     @FXML Button showFood;
-    @FXML Button showComingBus;
     @FXML ImageView mapImage;
     @FXML Label stopName;
 
@@ -46,7 +45,6 @@ public class NewBusStopInfoController implements Initializable {
         // 리스트 클릭 안되면 버튼 비활성화하게끔 지정
         showRoute.disableProperty().bind(stopList.getSelectionModel().selectedItemProperty().isNull());
         showFood.disableProperty().bind(stopList.getSelectionModel().selectedItemProperty().isNull());
-        showComingBus.disableProperty().bind(stopList.getSelectionModel().selectedItemProperty().isNull());
 
         // 리스트 선택한게 바뀌면 할 동작 설정
         stopList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<BusStopInfo>() {

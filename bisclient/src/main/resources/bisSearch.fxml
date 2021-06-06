@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kumoh.basicbis.SearchController">
    <children>
@@ -17,12 +22,11 @@
                         <Label layoutX="8.0" layoutY="73.0" text="도착 :" />
                         <Button fx:id="rtBt1" layoutX="207.0" layoutY="17.0" mnemonicParsing="false" onAction="#rtStartBt" text="검색" />
                         <Button fx:id="rtBt2" layoutX="207.0" layoutY="69.0" mnemonicParsing="false" onAction="#rtEndBt" text="검색" />
-                        <Button fx:id="rtBt3" layoutX="12.0" layoutY="118.0" mnemonicParsing="false" onAction="#rtSearchBus" prefHeight="23.0" prefWidth="227.0" text="길찾기 검색" />
+                        <Button fx:id="rtBt3" layoutX="12.0" layoutY="118.0" mnemonicParsing="false" onAction="#openSearchResult" prefHeight="23.0" prefWidth="227.0" text="길찾기 검색" />
                         <ListView fx:id="rtListView" layoutX="12.0" layoutY="149.0" onMouseClicked="#rtSelected" prefHeight="200.0" prefWidth="227.0" />
                         <TextField fx:id="rtTextField1" layoutX="46.0" layoutY="17.0" />
                         <TextField fx:id="rtTextField2" layoutX="46.0" layoutY="69.0" />
                         <ImageView fitHeight="280.0" fitWidth="284.0" layoutX="271.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" />
-                        <ListView fx:id="resultView" layoutX="271.0" layoutY="3.0" prefHeight="65.0" prefWidth="284.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -31,14 +35,15 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="203.0" layoutY="14.0" mnemonicParsing="false" text="검색" />
-                        <Button layoutX="203.0" layoutY="47.0" mnemonicParsing="false" text="검색" />
-                        <TextField layoutX="56.0" layoutY="14.0" />
-                        <TextField layoutX="56.0" layoutY="47.0" />
-                        <Label layoutX="14.0" layoutY="18.0" text="출발 :" />
-                        <Label layoutX="14.0" layoutY="51.0" text="도착 :" />
-                        <Button layoutX="16.0" layoutY="78.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="227.0" text="결과 검색" />
-                        <ListView layoutX="30.0" layoutY="114.0" prefHeight="200.0" prefWidth="200.0" />
+                         <Button fx:id="rcBt1" layoutX="207.0" layoutY="17.0" mnemonicParsing="false" onAction="#rcStartBt" text="검색" />
+                         <Button fx:id="rcBt2" layoutX="207.0" layoutY="69.0" mnemonicParsing="false" onAction="#rcEndBt" text="검색" />
+                         <TextField fx:id="rcTextField1" layoutX="46.0" layoutY="17.0" />
+                         <TextField fx:id="rcTextField2" layoutX="46.0" layoutY="69.0" />
+                         <Label layoutX="8.0" layoutY="21.0" text="출발 :" />
+                         <Label layoutX="8.0" layoutY="73.0" text="도착 :" />
+                         <Button fx:id="rcBt3" layoutX="12.0" layoutY="118.0" mnemonicParsing="false" onAction="#openRecommendationResult" prefHeight="23.0" prefWidth="227.0" text="결과 검색" />
+                         <ListView fx:id="rcListView" layoutX="12.0" layoutY="149.0" onMouseClicked="#rcSelected" prefHeight="200.0" prefWidth="227.0" />
+                         <ImageView fitHeight="280.0" fitWidth="284.0" layoutX="271.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </AnchorPane>
               </content>
